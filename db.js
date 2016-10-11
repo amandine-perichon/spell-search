@@ -17,11 +17,16 @@ function connect () {
   })
 }
 
+function listSpellByName (name) {
+  return spellCollection.findOne({name: name})
+}
+
 function listAllSpells () {
   return spellCollection.find()
 }
 
 module.exports = {
   connect: connect,
-  listAllSpells: listAllSpells
+  listAllSpells: listAllSpells,
+  listSpellByName: listSpellByName
 }

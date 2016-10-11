@@ -39,7 +39,16 @@ const Query = new GraphQLObjectType({
   fields: {
     spells: {
       type: new GraphQLList(Spell),
-      resolve: function() {
+      args: {
+        name: {
+          description: 'Name of the spell',
+          type: GraphQLString
+        }
+      },
+      resolve: function(root, params) {
+        if (params.name) {
+          return db.listSpellByName(params.name).then((data) => [data])
+        }
         return db.listAllSpells().toArray()
       }
     }
