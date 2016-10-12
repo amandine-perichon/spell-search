@@ -17,16 +17,25 @@ function connect () {
   })
 }
 
-function listSpellByName (name) {
-  return spellCollection.findOne({name: name})
-}
-
 function listAllSpells () {
   return spellCollection.find()
 }
 
+function findSpells (params) {
+  let query = Object.assign({}, params)
+  if (params.class) {
+    query = Object.assign({}, query, {classes: { "$in" : [params.class]}})
+    delete query.class
+  }
+  if (params.higher_levels) {
+    query = Object.assign({}, query, {higher_levels: {$exists: true}})
+  }
+  return spellCollection.find(query)
+}
+
+
 module.exports = {
   connect: connect,
   listAllSpells: listAllSpells,
-  listSpellByName: listSpellByName
+  findSpells: findSpells
 }

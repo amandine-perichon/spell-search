@@ -12,25 +12,62 @@ import {
 
 var db = require('./db')
 
+const School = new GraphQLEnumType({
+  name: "school",
+  values: {
+    abjuration: {value: "abjuration"},
+    conjuration: {value: "conjuration"},
+    divination: {value: "divination"},
+    enchantment: {value: "enchantment"},
+    evocation: {value: "evocation"},
+    illusion: {value: "illusion"},
+    necromancy: {value: "necromancy"},
+    transmutation: {value: "transmutation"},
+  }
+})
+
+const Class = new GraphQLEnumType({
+  name: "class",
+  values: {
+    bard: {value: "bard"},
+    cleric: {value: "cleric"},
+    druid: {value: "druid"},
+    paladin: {value: "paladin"},
+    ranger: {value: "ranger"},
+    sorcerer: {value: "sorcerer"},
+    warlock: {value: "warlock"},
+    wizard: {value: "wizard"}
+  }
+})
+
+const Components = new GraphQLObjectType({
+  name: 'Components',
+  description: 'Represent the component types and materials in a spell',
+  fields: () => ({
+    material: {type: GraphQLBoolean},
+    somatic: {type: GraphQLBoolean},
+    verbal: {type: GraphQLBoolean},
+    materials_needed: {type: new GraphQLList(GraphQLString)}
+  })
+})
+
 const Spell = new GraphQLObjectType({
   name: 'Spell',
   description: 'Represent a spell',
   fields: () => ({
-    _id: {type: GraphQLString},
-    name: {type: GraphQLString},
-    level: {type: GraphQLInt},
-    magicSchool: {type: GraphQLString},
-    castingTime: {type: GraphQLString},
-    range: {type: GraphQLString},
-    self: {type: GraphQLBoolean},
-    vComponents: {type: GraphQLBoolean},
-    sComponents: {type: GraphQLBoolean},
-    mComponents: {type: GraphQLBoolean},
-    componentMaterials: {type: GraphQLString},
+    _id: {type: new GraphQLNonNull(GraphQLString)},
+    name: {type: new GraphQLNonNull(GraphQLString)},
+    level: {type: new GraphQLNonNull(GraphQLString)},
+    school: {type: new GraphQLNonNull(School)},
+    casting_time: {type: new GraphQLNonNull(GraphQLString)},
+    range: {type: new GraphQLNonNull(GraphQLString)},
+    components: {type: new GraphQLNonNull(Components)},
     concentration: {type: GraphQLBoolean},
-    duration: {type: GraphQLString},
-    instantaneous: {type: GraphQLBoolean},
-    description: {type: GraphQLString}
+    duration: {type: new GraphQLNonNull(GraphQLString)},
+    description: {type: new GraphQLNonNull(GraphQLString)},
+    ritual: {type: GraphQLBoolean},
+    higher_levels: {type: GraphQLString},
+    classes: {type: new GraphQLNonNull(new GraphQLList(Class))}
   })
 });
 
@@ -43,11 +80,23 @@ const Query = new GraphQLObjectType({
         name: {
           description: 'Name of the spell',
           type: GraphQLString
+        },
+        class: {
+          description: 'Class that can cast the spell',
+          type: Class
+        },
+        level: {
+          description: 'Level of the spell',
+          type: GraphQLString
+        },
+        higher_levels: {
+          description: 'Indicates whether a description of the spells at higher levels is available',
+          type: GraphQLBoolean
         }
       },
       resolve: function(root, params) {
-        if (params.name) {
-          return db.listSpellByName(params.name).then((data) => [data])
+        if (Object.keys(params).length) {
+          return db.findSpells(params).toArray()
         }
         return db.listAllSpells().toArray()
       }
