@@ -4,8 +4,10 @@
   "description": "GraphQL server with dungeons and dragons 5th edition information",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --watch",
+    "devserver": "webpack-dev-server --hot --inline",
+    "server": "nodemon ./src/server/server.js",
+    "start": "node ./src/server/server.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,12 @@
     "url": "https://github.com/amandine-perichon/graphQL-dd5thed/issues"
   },
   "homepage": "https://github.com/amandine-perichon/graphQL-dd5thed#readme",
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ]
+  },
   "dependencies": {
     "babel-preset-es2015": "^6.16.0",
     "babel-register": "^6.16.3",
@@ -24,5 +32,16 @@
     "express-graphql": "^0.5.4",
     "graphql": "^0.7.2",
     "mongodb": "^2.2.10"
+  },
+  "devDependencies": {
+    "babel-core": "^6.18.0",
+    "babel-loader": "^6.2.6",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "nodemon": "^1.11.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
   }
 }

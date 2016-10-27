@@ -10,7 +10,7 @@ import {
   GraphQLNonNull
 } from 'graphql';
 
-var db = require('./db')
+var db = require('./../db/db')
 
 const School = new GraphQLEnumType({
   name: "school",

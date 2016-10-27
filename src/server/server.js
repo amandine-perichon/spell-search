@@ -6,14 +6,16 @@ var express = require('express')
 var graphql = require('graphql')
 var expressGraphql = require('express-graphql')
 
-var Schema = require('./schema.js').default
-var db = require('./db')
+var Schema = require('./schema/schema.js').default
+var db = require('./db/db')
 
 var PORT = 3000
 
 var app = express()
 
-app.use('/', expressGraphql({
+app.use(express.static(__dirname + './../public'))
+
+app.use('/graphql', expressGraphql({
   schema: Schema,
   graphiql: true
 }))
