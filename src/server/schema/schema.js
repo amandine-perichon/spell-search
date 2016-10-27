@@ -8,7 +8,7 @@ import {
   GraphQLFloat,
   GraphQLEnumType,
   GraphQLNonNull
-} from 'graphql';
+} from 'graphql'
 
 var db = require('./../db/db')
 
@@ -50,26 +50,44 @@ const Components = new GraphQLObjectType({
     materials_needed: {type: new GraphQLList(GraphQLString)}
   })
 })
+//
+// const Spell = new GraphQLObjectType({
+//   name: 'Spell',
+//   description: 'Represent a spell',
+//   fields: () => ({
+//     _id: {type: new GraphQLNonNull(GraphQLString)},
+//     name: {type: new GraphQLNonNull(GraphQLString)},
+//     level: {type: new GraphQLNonNull(GraphQLString)},
+//     school: {type: new GraphQLNonNull(School)},
+//     casting_time: {type: new GraphQLNonNull(GraphQLString)},
+//     range: {type: new GraphQLNonNull(GraphQLString)},
+//     components: {type: new GraphQLNonNull(Components)},
+//     duration: {type: new GraphQLNonNull(GraphQLString)},
+//     description: {type: new GraphQLNonNull(GraphQLString)},
+//     ritual: {type: GraphQLBoolean},
+//     higher_levels: {type: GraphQLString},
+//     classes: {type: new GraphQLNonNull(new GraphQLList(Class))}
+//   })
+// })
 
 const Spell = new GraphQLObjectType({
   name: 'Spell',
   description: 'Represent a spell',
   fields: () => ({
-    _id: {type: new GraphQLNonNull(GraphQLString)},
-    name: {type: new GraphQLNonNull(GraphQLString)},
-    level: {type: new GraphQLNonNull(GraphQLString)},
-    school: {type: new GraphQLNonNull(School)},
-    casting_time: {type: new GraphQLNonNull(GraphQLString)},
-    range: {type: new GraphQLNonNull(GraphQLString)},
-    components: {type: new GraphQLNonNull(Components)},
-    concentration: {type: GraphQLBoolean},
-    duration: {type: new GraphQLNonNull(GraphQLString)},
-    description: {type: new GraphQLNonNull(GraphQLString)},
+    _id: {type: GraphQLString},
+    name: {type: GraphQLString},
+    level: {type: GraphQLString},
+    school: {type: School},
+    casting_time: {type: GraphQLString},
+    range: {type: GraphQLString},
+    components: {type: Components},
+    duration: {type: GraphQLString},
+    description: {type: GraphQLString},
     ritual: {type: GraphQLBoolean},
     higher_levels: {type: GraphQLString},
-    classes: {type: new GraphQLNonNull(new GraphQLList(Class))}
+    classes: {type: new GraphQLList(Class)}
   })
-});
+})
 
 const Query = new GraphQLObjectType({
   name: "RootQuery",
