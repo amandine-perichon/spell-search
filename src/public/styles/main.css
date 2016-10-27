@@ -5,6 +5,12 @@ header, footer {
   background-color: steelblue;
 }
 
+/* SEACH FORM STYLE */
+
+.search-form {
+  margin: 1rem;
+}
+
 /* SPELL LIST STYLE */
 
 .spell-list {
@@ -12,6 +18,8 @@ header, footer {
 }
 
 .spell {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   padding: 2rem;
   border: 1px solid grey;
 }

@@ -42571,7 +42571,7 @@
 	  value: true
 	});
 	
-	var _templateObject = _taggedTemplateLiteral(['query {\n  spells {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}'], ['query {\n  spells {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}']);
+	var _templateObject = _taggedTemplateLiteral(['query SpellSearch {\n  spells {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}'], ['query SpellSearch {\n  spells {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}']);
 	
 	var _reactApollo = __webpack_require__(238);
 	
@@ -42590,6 +42590,28 @@
 	var SpellQuery = (0, _graphqlTag2.default)(_templateObject);
 	
 	exports.default = (0, _reactApollo.graphql)(SpellQuery)(_App2.default);
+	
+	// const SpellQuery = gql`query SpellSearch ($magicSchool: School) {
+	//   spells (magicSchool: $id) {
+	//   _id
+	//   name
+	//   level
+	//   school
+	//   casting_time
+	//   range
+	//   duration
+	//   description
+	//   ritual
+	//   higher_levels
+	//   classes
+	//   components {
+	//     material
+	//     somatic
+	//     verbal
+	//     materials_needed
+	//   	}
+	// 	}
+	// }
 
 /***/ },
 /* 247 */
@@ -47121,19 +47143,23 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Spell = __webpack_require__(250);
+	var _Spells = __webpack_require__(252);
 	
-	var _Spell2 = _interopRequireDefault(_Spell);
+	var _Spells2 = _interopRequireDefault(_Spells);
+	
+	var _SearchForm = __webpack_require__(251);
+	
+	var _SearchForm2 = _interopRequireDefault(_SearchForm);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = _react2.default.createClass({
 	  displayName: 'App',
+	
+	  props: {
+	    data: _react2.default.PropTypes.object.isRequired
+	  },
 	  render: function render() {
-	    var spells = this.props.data.spells;
-	    var spellList = spells ? spells.map(function (elem) {
-	      return _react2.default.createElement(_Spell2.default, { key: elem._id, spell: elem });
-	    }) : null;
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -47149,11 +47175,8 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'container' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'spell-list' },
-	          spellList ? spellList : _react2.default.createElement('div', { className: 'loader' })
-	        )
+	        _react2.default.createElement(_SearchForm2.default, null),
+	        _react2.default.createElement(_Spells2.default, { loading: this.props.data.loading, spells: this.props.data.spells })
 	      ),
 	      _react2.default.createElement(
 	        'footer',
@@ -47303,6 +47326,132 @@
 	          spell.higher_levels ? "Higher Levels: " + spell.higher_levels : null
 	        )
 	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 251 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _react2.default.createClass({
+	  displayName: "SearchForm",
+	  getInitialState: function getInitialState() {
+	    return {
+	      school: null
+	    };
+	  },
+	  changeSchool: function changeSchool(evt) {
+	    console.log(evt.target.value);
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "search-form" },
+	      _react2.default.createElement(
+	        "div",
+	        null,
+	        "Pick a school"
+	      ),
+	      _react2.default.createElement(
+	        "select",
+	        { onChange: this.changeSchool },
+	        _react2.default.createElement(
+	          "option",
+	          { value: "abjuration" },
+	          "Abjuration"
+	        ),
+	        _react2.default.createElement(
+	          "option",
+	          { value: "conjuration" },
+	          "Conjuration"
+	        ),
+	        _react2.default.createElement(
+	          "option",
+	          { value: "divination" },
+	          "Divination"
+	        ),
+	        _react2.default.createElement(
+	          "option",
+	          { value: "enchantment" },
+	          "Enchantment"
+	        ),
+	        _react2.default.createElement(
+	          "option",
+	          { value: "evocation" },
+	          "Evocation"
+	        ),
+	        _react2.default.createElement(
+	          "option",
+	          { value: "illusion" },
+	          "Illusion"
+	        ),
+	        _react2.default.createElement(
+	          "option",
+	          { value: "necromancy" },
+	          "Necromancy"
+	        ),
+	        _react2.default.createElement(
+	          "option",
+	          { value: "transmutation" },
+	          "Transmutation"
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 252 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Spell = __webpack_require__(250);
+	
+	var _Spell2 = _interopRequireDefault(_Spell);
+	
+	var _SearchForm = __webpack_require__(251);
+	
+	var _SearchForm2 = _interopRequireDefault(_SearchForm);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _react2.default.createClass({
+	  displayName: 'Spells',
+	
+	  props: {
+	    loading: _react2.default.PropTypes.bool.isRequired,
+	    spells: _react2.default.PropTypes.array.isRequired
+	  },
+	  render: function render() {
+	    var spellList = this.props.spells ? this.props.spells.map(function (elem) {
+	      return _react2.default.createElement(_Spell2.default, { key: elem._id, spell: elem });
+	    }) : null;
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'spell-list' },
+	      this.props.loading ? _react2.default.createElement('div', { className: 'loader' }) : spellList
 	    );
 	  }
 	});

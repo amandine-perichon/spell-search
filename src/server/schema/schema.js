@@ -103,8 +103,8 @@ const Query = new GraphQLObjectType({
           description: 'Class that can cast the spell',
           type: Class
         },
-        school: {
-          description: 'School of magic',
+        schools: {
+          description: 'Schools of magic',
           type: School
         },
         level: {

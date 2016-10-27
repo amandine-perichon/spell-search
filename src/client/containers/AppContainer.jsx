@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 
 import App from './../components/App'
 
-const SpellQuery = gql`query {
+const SpellQuery = gql`query SpellSearch {
   spells {
   _id
   name
@@ -26,3 +26,25 @@ const SpellQuery = gql`query {
 }`
 
 export default graphql(SpellQuery)(App)
+
+// const SpellQuery = gql`query SpellSearch ($magicSchool: School) {
+//   spells (magicSchool: $id) {
+//   _id
+//   name
+//   level
+//   school
+//   casting_time
+//   range
+//   duration
+//   description
+//   ritual
+//   higher_levels
+//   classes
+//   components {
+//     material
+//     somatic
+//     verbal
+//     materials_needed
+//   	}
+// 	}
+// }
