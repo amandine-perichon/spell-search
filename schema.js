@@ -85,6 +85,10 @@ const Query = new GraphQLObjectType({
           description: 'Class that can cast the spell',
           type: Class
         },
+        school: {
+          description: 'School of magic',
+          type: School
+        },
         level: {
           description: 'Level of the spell',
           type: GraphQLString
@@ -92,6 +96,34 @@ const Query = new GraphQLObjectType({
         higher_levels: {
           description: 'Indicates whether a description of the spells at higher levels is available',
           type: GraphQLBoolean
+        },
+        duration: {
+          description: 'Text search on duration field',
+          type: GraphQLString
+        },
+        range: {
+          description: 'Text search on the range field',
+          type: GraphQLString
+        },
+        ritual: {
+          description: 'Spell can be cast as ritual',
+          type: GraphQLBoolean
+        },
+        concentration: {
+          description: 'Spell requires concentration',
+          type: GraphQLBoolean
+        },
+        casting_time: {
+          description: 'Text search on casting_time field',
+          type: GraphQLString
+        },
+        description: {
+          description: 'Text search on description field',
+          type: GraphQLString
+        },
+        component_type: {
+          description: "Type of component: verbal, somatic or material",
+          type: GraphQLString
         }
       },
       resolve: function(root, params) {
