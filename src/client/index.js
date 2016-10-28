@@ -9,7 +9,7 @@ const client = new ApolloClient()
 
 document.addEventListener('DOMContentLoaded', () => {
   render( <ApolloProvider client={client}>
-            <AppContainer />
+            <AppContainer school="necromancy"/>
           </ApolloProvider>,
     document.getElementById('app')
   )

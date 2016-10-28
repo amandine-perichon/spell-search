@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 
 import App from './../components/App'
 
-const SpellQuery = gql`query SpellSearch ($magicSchool: school) {
-  spells (school: $magicSchool) {
+const SpellQuery = gql`query SpellSearch ($school: school) {
+  spells (school: $school) {
   _id
   name
   level
@@ -26,5 +26,5 @@ const SpellQuery = gql`query SpellSearch ($magicSchool: school) {
 }`
 
 export default graphql(SpellQuery, {
-  options: { variables: {magicSchool: "necromancy"}}
+  options: ({ school }) => ({ variables: {school: school}})
 })(App)
