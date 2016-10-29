@@ -10,7 +10,8 @@ export default React.createClass({
     onLevelChange: React.PropTypes.func.isRequired,
     onDurationChange: React.PropTypes.func.isRequired,
     onConcentrationChange: React.PropTypes.func.isRequired,
-    onRangeChange: React.PropTypes.func.isRequired
+    onRangeChange: React.PropTypes.func.isRequired,
+    onCastingChange: React.PropTypes.func.isRequired
   },
   render () {
   return (
@@ -92,11 +93,19 @@ export default React.createClass({
           <option value="10 feet">10 feet</option>
         </select>
       </div>
+      <div className="casting-time-filter">
+        <select onChange={evt => this.props.onCastingChange(evt.target.value)}>
+          <option value="all">All casting times</option>
+          <option value="bonus">Bonus</option>
+          <option value="reaction">Reaction</option>
+          <option value="action">Action</option>
+          <option value="minute">Minutes</option>
+        </select>
+      </div>
     </div>
   )
   }
 })
 
-// casting_time
 // components
 // description

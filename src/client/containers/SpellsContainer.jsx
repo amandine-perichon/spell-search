@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 
 import Spells from './../components/Spells'
 
-const SpellQuery = gql`query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String) {
-  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range) {
+const SpellQuery = gql`query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String, $castingTime: String) {
+  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range, casting_time: $castingTime) {
   _id
   name
   level
@@ -26,7 +26,7 @@ const SpellQuery = gql`query SpellSearch ($school: School, $higherLevels: Boolea
 }`
 
 export default graphql(SpellQuery, {
-  options: ({ school, higherLevels, ritual, spellClass, name, level, duration, concentration, range }) => {
+  options: ({ school, higherLevels, ritual, spellClass, name, level, duration, concentration, range, castingTime }) => {
     return { variables: {
                 school: school,
                 spellClass: spellClass,
@@ -36,7 +36,8 @@ export default graphql(SpellQuery, {
                 level: level,
                 duration: duration,
                 concentration: concentration,
-                range: range
+                range: range,
+                castingTime: castingTime
               }
             }
   }

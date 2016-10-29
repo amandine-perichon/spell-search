@@ -42597,7 +42597,8 @@
 	      state: null,
 	      duration: null,
 	      concentration: null,
-	      range: null
+	      range: null,
+	      castingTime: null
 	    };
 	  },
 	  onSchoolChange: function onSchoolChange(school) {
@@ -42627,6 +42628,9 @@
 	  onRangeChange: function onRangeChange(range) {
 	    this.setState({ range: range !== "all" ? range : null });
 	  },
+	  onCastingChange: function onCastingChange(castingTime) {
+	    this.setState({ castingTime: castingTime !== "all" ? castingTime : null });
+	  },
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
@@ -42651,7 +42655,8 @@
 	          onLevelChange: this.onLevelChange,
 	          onDurationChange: this.onDurationChange,
 	          onConcentrationChange: this.onConcentrationChange,
-	          onRangeChange: this.onRangeChange
+	          onRangeChange: this.onRangeChange,
+	          onCastingChange: this.onCastingChange
 	        }),
 	        _react2.default.createElement(_SpellsContainer2.default, { school: this.state.school,
 	          spellClass: this.state.spellClass,
@@ -42661,7 +42666,8 @@
 	          level: this.state.level,
 	          duration: this.state.duration,
 	          concentration: this.state.concentration,
-	          range: this.state.range
+	          range: this.state.range,
+	          castingTime: this.state.castingTime
 	        })
 	      ),
 	      _react2.default.createElement(
@@ -42683,7 +42689,7 @@
 	  value: true
 	});
 	
-	var _templateObject = _taggedTemplateLiteral(['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}'], ['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}']);
+	var _templateObject = _taggedTemplateLiteral(['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String, $castingTime: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range, casting_time: $castingTime) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}'], ['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String, $castingTime: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range, casting_time: $castingTime) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}']);
 	
 	var _reactApollo = __webpack_require__(238);
 	
@@ -42711,7 +42717,8 @@
 	        level = _ref.level,
 	        duration = _ref.duration,
 	        concentration = _ref.concentration,
-	        range = _ref.range;
+	        range = _ref.range,
+	        castingTime = _ref.castingTime;
 	
 	    return { variables: {
 	        school: school,
@@ -42722,7 +42729,8 @@
 	        level: level,
 	        duration: duration,
 	        concentration: concentration,
-	        range: range
+	        range: range,
+	        castingTime: castingTime
 	      }
 	    };
 	  }
@@ -47485,7 +47493,8 @@
 	    onLevelChange: _react2.default.PropTypes.func.isRequired,
 	    onDurationChange: _react2.default.PropTypes.func.isRequired,
 	    onConcentrationChange: _react2.default.PropTypes.func.isRequired,
-	    onRangeChange: _react2.default.PropTypes.func.isRequired
+	    onRangeChange: _react2.default.PropTypes.func.isRequired,
+	    onCastingChange: _react2.default.PropTypes.func.isRequired
 	  },
 	  render: function render() {
 	    var _this = this;
@@ -47769,12 +47778,46 @@
 	            "10 feet"
 	          )
 	        )
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "casting-time-filter" },
+	        _react2.default.createElement(
+	          "select",
+	          { onChange: function onChange(evt) {
+	              return _this.props.onCastingChange(evt.target.value);
+	            } },
+	          _react2.default.createElement(
+	            "option",
+	            { value: "all" },
+	            "All casting times"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "bonus" },
+	            "Bonus"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "reaction" },
+	            "Reaction"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "action" },
+	            "Action"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "minute" },
+	            "Minutes"
+	          )
+	        )
 	      )
 	    );
 	  }
 	});
 	
-	// casting_time
 	// components
 	// description
 
