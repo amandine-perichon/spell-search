@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 
 import Spells from './../components/Spells'
 
-const SpellQuery = gql`query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class) {
-  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual) {
+const SpellQuery = gql`query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String) {
+  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name) {
   _id
   name
   level
@@ -26,12 +26,13 @@ const SpellQuery = gql`query SpellSearch ($school: School, $higherLevels: Boolea
 }`
 
 export default graphql(SpellQuery, {
-  options: ({ school, higherLevels, ritual, spellClass }) => {
+  options: ({ school, higherLevels, ritual, spellClass, name }) => {
     return { variables: {
                 school: school,
                 spellClass: spellClass,
                 higherLevels: higherLevels,
-                ritual: ritual
+                ritual: ritual,
+                name: name
               }
             }
   }

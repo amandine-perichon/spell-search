@@ -9,7 +9,8 @@ export default React.createClass({
       school: null,
       higherLevels: null,
       ritual: null,
-      spellClass: null
+      spellClass: null,
+      name: null
     }
   },
   onSchoolChange (school) {
@@ -24,6 +25,9 @@ export default React.createClass({
   onClassChange (spellClass) {
     this.setState({spellClass: spellClass!=="all" ? spellClass : null})
   },
+  onNameChange (name) {
+    this.setState({name: name!=="" ? name : null})
+  },
   render () {
     return (
       <div>
@@ -35,11 +39,13 @@ export default React.createClass({
                       onHigherLevelChange={this.onHigherLevelChange}
                       onRitualChange={this.onRitualChange}
                       onClassChange={this.onClassChange}
+                      onNameChange={this.onNameChange}
                       />
           <SpellsContainer school={this.state.school}
                            spellClass={this.state.spellClass}
                            higherLevels={this.state.higherLevels}
                            ritual={this.state.ritual}
+                           name={this.state.name}
                            />
         </div>
         <footer>Work in progress... on Github: https://github.com/amandine-perichon/spell-search</footer>

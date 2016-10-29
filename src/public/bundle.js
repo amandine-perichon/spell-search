@@ -42592,7 +42592,8 @@
 	      school: null,
 	      higherLevels: null,
 	      ritual: null,
-	      spellClass: null
+	      spellClass: null,
+	      name: null
 	    };
 	  },
 	  onSchoolChange: function onSchoolChange(school) {
@@ -42606,6 +42607,9 @@
 	  },
 	  onClassChange: function onClassChange(spellClass) {
 	    this.setState({ spellClass: spellClass !== "all" ? spellClass : null });
+	  },
+	  onNameChange: function onNameChange(name) {
+	    this.setState({ name: name !== "" ? name : null });
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(
@@ -42626,12 +42630,14 @@
 	        _react2.default.createElement(_SearchForm2.default, { onSchoolChange: this.onSchoolChange,
 	          onHigherLevelChange: this.onHigherLevelChange,
 	          onRitualChange: this.onRitualChange,
-	          onClassChange: this.onClassChange
+	          onClassChange: this.onClassChange,
+	          onNameChange: this.onNameChange
 	        }),
 	        _react2.default.createElement(_SpellsContainer2.default, { school: this.state.school,
 	          spellClass: this.state.spellClass,
 	          higherLevels: this.state.higherLevels,
-	          ritual: this.state.ritual
+	          ritual: this.state.ritual,
+	          name: this.state.name
 	        })
 	      ),
 	      _react2.default.createElement(
@@ -42653,7 +42659,7 @@
 	  value: true
 	});
 	
-	var _templateObject = _taggedTemplateLiteral(['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}'], ['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}']);
+	var _templateObject = _taggedTemplateLiteral(['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}'], ['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}']);
 	
 	var _reactApollo = __webpack_require__(238);
 	
@@ -42676,13 +42682,15 @@
 	    var school = _ref.school,
 	        higherLevels = _ref.higherLevels,
 	        ritual = _ref.ritual,
-	        spellClass = _ref.spellClass;
+	        spellClass = _ref.spellClass,
+	        name = _ref.name;
 	
 	    return { variables: {
 	        school: school,
 	        spellClass: spellClass,
 	        higherLevels: higherLevels,
-	        ritual: ritual
+	        ritual: ritual,
+	        name: name
 	      }
 	    };
 	  }
@@ -47440,7 +47448,8 @@
 	    onSchoolChange: _react2.default.PropTypes.func.isRequired,
 	    onHigherLevelChange: _react2.default.PropTypes.func.isRequired,
 	    onRitualChange: _react2.default.PropTypes.func.isRequired,
-	    onClassChange: _react2.default.PropTypes.func.isRequired
+	    onClassChange: _react2.default.PropTypes.func.isRequired,
+	    onNameChange: _react2.default.PropTypes.func.isRequired
 	  },
 	  render: function render() {
 	    var _this = this;
@@ -47448,6 +47457,20 @@
 	    return _react2.default.createElement(
 	      "div",
 	      { className: "search-form" },
+	      _react2.default.createElement(
+	        "div",
+	        null,
+	        _react2.default.createElement(
+	          "label",
+	          { "for": "name" },
+	          "Name "
+	        ),
+	        _react2.default.createElement("input", { type: "text",
+	          name: "name",
+	          onChange: function onChange(evt) {
+	            return _this.props.onNameChange(evt.target.value);
+	          } })
+	      ),
 	      _react2.default.createElement(
 	        "div",
 	        { className: "school-filter" },
