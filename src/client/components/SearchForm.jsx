@@ -6,17 +6,23 @@ export default React.createClass({
     onHigherLevelChange: React.PropTypes.func.isRequired,
     onRitualChange: React.PropTypes.func.isRequired,
     onClassChange: React.PropTypes.func.isRequired,
-    onNameChange: React.PropTypes.func.isRequired
+    onNameChange: React.PropTypes.func.isRequired,
+    onLevelChange: React.PropTypes.func.isRequired
   },
   render () {
   return (
     <div className="search-form">
-      <div>
-        <label for="name">Name </label>
+      <div className="name-filter">
+        <label htmlFor="name">Name </label>
         <input type="text"
                name="name"
-               onChange={evt => this.props.onNameChange(evt.target.value)}/>
-
+               onChange={evt => this.props.onNameChange(evt.target.value)} />
+      </div>
+      <div className="level-filter">
+        <label htmlFor="level">Level </label>
+        <input type="text"
+               name="level"
+               onChange={evt => this.props.onLevelChange(evt.target.value)} />
       </div>
       <div className="school-filter">School
         <select onChange={evt => this.props.onSchoolChange(evt.target.value)}>
