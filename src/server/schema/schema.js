@@ -13,7 +13,7 @@ import {
 var db = require('./../db/db')
 
 const School = new GraphQLEnumType({
-  name: "school",
+  name: "School",
   values: {
     abjuration: {value: "abjuration"},
     conjuration: {value: "conjuration"},
@@ -27,7 +27,7 @@ const School = new GraphQLEnumType({
 })
 
 const Class = new GraphQLEnumType({
-  name: "class",
+  name: "Class",
   values: {
     bard: {value: "bard"},
     cleric: {value: "cleric"},

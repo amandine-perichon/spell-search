@@ -8,7 +8,8 @@ export default React.createClass({
     return {
       school: null,
       higherLevels: null,
-      ritual: null
+      ritual: null,
+      spellClass: null
     }
   },
   onSchoolChange (school) {
@@ -20,6 +21,9 @@ export default React.createClass({
   onRitualChange (ritual) {
     this.setState({ritual: ritual})
   },
+  onClassChange (spellClass) {
+    this.setState({spellClass: spellClass!=="all" ? spellClass : null})
+  },
   render () {
     return (
       <div>
@@ -30,8 +34,10 @@ export default React.createClass({
           <SearchForm onSchoolChange={this.onSchoolChange}
                       onHigherLevelChange={this.onHigherLevelChange}
                       onRitualChange={this.onRitualChange}
+                      onClassChange={this.onClassChange}
                       />
           <SpellsContainer school={this.state.school}
+                           spellClass={this.state.spellClass}
                            higherLevels={this.state.higherLevels}
                            ritual={this.state.ritual}
                            />

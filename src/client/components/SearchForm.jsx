@@ -4,7 +4,8 @@ export default React.createClass({
   props: {
     onSchoolChange: React.PropTypes.func.isRequired,
     onHigherLevelChange: React.PropTypes.func.isRequired,
-    onRitualChange: React.PropTypes.func.isRequired
+    onRitualChange: React.PropTypes.func.isRequired,
+    onClassChange: React.PropTypes.func.isRequired,
   },
   render () {
   return (
@@ -22,7 +23,19 @@ export default React.createClass({
           <option value="transmutation">Transmutation</option>
         </select>
       </div>
-      
+      <div className="class-filter">Class
+        <select onChange={evt => this.props.onClassChange(evt.target.value)}>
+          <option value="all">All classes</option>
+          <option value="bard">Bard</option>
+          <option value="cleric">Cleric</option>
+          <option value="druid">Druid</option>
+          <option value="paladin">Paladin</option>
+          <option value="ranger">Ranger</option>
+          <option value="sorcerer">Sorcerer</option>
+          <option value="warlock">Warlock</option>
+          <option value="wizard">Wizard</option>
+        </select>
+      </div>
       <div className="higher-levels-filter">
         <input type="checkbox"
                name="higher_levels"
