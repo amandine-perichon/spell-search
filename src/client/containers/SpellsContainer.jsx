@@ -1,7 +1,7 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import App from './../components/App'
+import Spells from './../components/Spells'
 
 const SpellQuery = gql`query SpellSearch ($school: school) {
   spells (school: $school) {
@@ -27,4 +27,4 @@ const SpellQuery = gql`query SpellSearch ($school: school) {
 
 export default graphql(SpellQuery, {
   options: ({ school }) => ({ variables: {school: school}})
-})(App)
+})(Spells)

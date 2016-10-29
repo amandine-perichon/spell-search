@@ -1,19 +1,14 @@
 import React from 'react'
 
 export default React.createClass({
-  getInitialState () {
-    return {
-      school: null
-    }
-  },
-  changeSchool (evt) {
-    console.log(evt.target.value)
+  props: {
+    onSchoolChange: React.PropTypes.func.isRequired
   },
   render () {
   return (
     <div className="search-form">
       <div>Pick a school</div>
-      <select onChange={this.changeSchool}>
+      <select onChange={evt => this.props.onSchoolChange(evt.target.value)}>
         <option value="abjuration">Abjuration</option>
         <option value="conjuration">Conjuration</option>
         <option value="divination">Divination</option>

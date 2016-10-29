@@ -1,11 +1,16 @@
 import React from 'react'
 
-import Spells from './Spells'
+import SpellsContainer from './../containers/SpellsContainer'
 import SearchForm from './SearchForm'
 
 export default React.createClass({
-  props: {
-    data: React.PropTypes.object.isRequired
+  getInitialState () {
+    return {
+      school: ""
+    }
+  },
+  onSchoolChange (school) {
+    this.setState({school: school})
   },
   render () {
     return (
@@ -14,8 +19,8 @@ export default React.createClass({
           <h1>Search for spells</h1>
         </header>
         <div className="container">
-          <SearchForm />
-          <Spells loading={this.props.data.loading} spells={this.props.data.spells}/>
+          <SearchForm onSchoolChange={this.onSchoolChange}/>
+          <SpellsContainer school={this.state.school} />
         </div>
         <footer>Work in progress...</footer>
       </div>

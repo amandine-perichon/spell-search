@@ -3,13 +3,13 @@ import {render} from 'react-dom'
 import ApolloClient from 'apollo-client'
 import { ApolloProvider } from 'react-apollo'
 
-import AppContainer from './containers/AppContainer'
+import App from './components/App'
 
 const client = new ApolloClient()
 
 document.addEventListener('DOMContentLoaded', () => {
   render( <ApolloProvider client={client}>
-            <AppContainer school="necromancy"/>
+            <App />
           </ApolloProvider>,
     document.getElementById('app')
   )
