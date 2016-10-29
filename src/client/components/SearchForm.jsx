@@ -7,7 +7,9 @@ export default React.createClass({
     onRitualChange: React.PropTypes.func.isRequired,
     onClassChange: React.PropTypes.func.isRequired,
     onNameChange: React.PropTypes.func.isRequired,
-    onLevelChange: React.PropTypes.func.isRequired
+    onLevelChange: React.PropTypes.func.isRequired,
+    onDurationChange: React.PropTypes.func.isRequired,
+    onConcentrationChange: React.PropTypes.func.isRequired
   },
   render () {
   return (
@@ -24,7 +26,7 @@ export default React.createClass({
                name="level"
                onChange={evt => this.props.onLevelChange(evt.target.value)} />
       </div>
-      <div className="school-filter">School
+      <div className="school-filter">School <br />
         <select onChange={evt => this.props.onSchoolChange(evt.target.value)}>
           <option value="all">All schools</option>
           <option value="abjuration">Abjuration</option>
@@ -37,7 +39,7 @@ export default React.createClass({
           <option value="transmutation">Transmutation</option>
         </select>
       </div>
-      <div className="class-filter">Class
+      <div className="class-filter">Class <br />
         <select onChange={evt => this.props.onClassChange(evt.target.value)}>
           <option value="all">All classes</option>
           <option value="bard">Bard</option>
@@ -58,8 +60,21 @@ export default React.createClass({
       <div>
         <input type="checkbox"
                name="ritual"
-               onChange={evt => this.props.onRitualChange(evt.target.checked)}/> Only spells which can be cast as aritual<br />
+               onChange={evt => this.props.onRitualChange(evt.target.checked)}/> Ritual only<br />
 
+      </div>
+      <div className="duration-filter">
+        <select onChange={evt => this.props.onDurationChange(evt.target.value)}>
+          <option value="all">All durations</option>
+          <option value="instantaneous">Instantaneous</option>
+          <option value="hour">Hours</option>
+          <option value="minute">Minutes</option>
+          <option value="day">Days</option>
+          <option value="round">Rounds</option>
+        </select><br />
+        <input type="checkbox"
+               name="concentration"
+               onChange={evt => this.props.onConcentrationChange(evt.target.checked)}/> Concentration only<br />
       </div>
     </div>
   )

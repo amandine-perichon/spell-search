@@ -53,6 +53,14 @@ function findSpells (params) {
   if (params.hasOwnProperty('duration')) {
     query = Object.assign({}, query, {duration: {$regex: params.duration, $options: "$i"}})
   }
+  if (params.hasOwnProperty('concentration')) {
+    query = Object.assign({}, query, {duration: {$regex: "concentration", $options: "$i"}})
+    delete query.concentration
+  }
+  if (params.hasOwnProperty('concentration') && params.hasOwnProperty('duration')) {
+    query = Object.assign({}, query, {duration: {$regex: `Concentration.*${params.duration}|${params.duration}.*Concentration`, $options: "$i"}})
+    delete query.concentration
+  }
   if (params.hasOwnProperty('casting_time')) {
     query = Object.assign({}, query, {casting_time: {$regex: params.casting_time, $options: "$i"}})
   }

@@ -42594,7 +42594,9 @@
 	      ritual: null,
 	      spellClass: null,
 	      name: null,
-	      state: null
+	      state: null,
+	      duration: null,
+	      concentration: null
 	    };
 	  },
 	  onSchoolChange: function onSchoolChange(school) {
@@ -42614,6 +42616,12 @@
 	  },
 	  onLevelChange: function onLevelChange(level) {
 	    this.setState({ level: level !== "" ? level : null });
+	  },
+	  onDurationChange: function onDurationChange(duration) {
+	    this.setState({ duration: duration !== "all" ? duration : null });
+	  },
+	  onConcentrationChange: function onConcentrationChange(concentration) {
+	    this.setState({ concentration: concentration ? concentration : null });
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(
@@ -42636,14 +42644,18 @@
 	          onRitualChange: this.onRitualChange,
 	          onClassChange: this.onClassChange,
 	          onNameChange: this.onNameChange,
-	          onLevelChange: this.onLevelChange
+	          onLevelChange: this.onLevelChange,
+	          onDurationChange: this.onDurationChange,
+	          onConcentrationChange: this.onConcentrationChange
 	        }),
 	        _react2.default.createElement(_SpellsContainer2.default, { school: this.state.school,
 	          spellClass: this.state.spellClass,
 	          higherLevels: this.state.higherLevels,
 	          ritual: this.state.ritual,
 	          name: this.state.name,
-	          level: this.state.level
+	          level: this.state.level,
+	          duration: this.state.duration,
+	          concentration: this.state.concentration
 	        })
 	      ),
 	      _react2.default.createElement(
@@ -42665,7 +42677,7 @@
 	  value: true
 	});
 	
-	var _templateObject = _taggedTemplateLiteral(['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}'], ['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}']);
+	var _templateObject = _taggedTemplateLiteral(['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}'], ['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}']);
 	
 	var _reactApollo = __webpack_require__(238);
 	
@@ -42690,7 +42702,9 @@
 	        ritual = _ref.ritual,
 	        spellClass = _ref.spellClass,
 	        name = _ref.name,
-	        level = _ref.level;
+	        level = _ref.level,
+	        duration = _ref.duration,
+	        concentration = _ref.concentration;
 	
 	    return { variables: {
 	        school: school,
@@ -42698,7 +42712,9 @@
 	        higherLevels: higherLevels,
 	        ritual: ritual,
 	        name: name,
-	        level: level
+	        level: level,
+	        duration: duration,
+	        concentration: concentration
 	      }
 	    };
 	  }
@@ -47458,7 +47474,9 @@
 	    onRitualChange: _react2.default.PropTypes.func.isRequired,
 	    onClassChange: _react2.default.PropTypes.func.isRequired,
 	    onNameChange: _react2.default.PropTypes.func.isRequired,
-	    onLevelChange: _react2.default.PropTypes.func.isRequired
+	    onLevelChange: _react2.default.PropTypes.func.isRequired,
+	    onDurationChange: _react2.default.PropTypes.func.isRequired,
+	    onConcentrationChange: _react2.default.PropTypes.func.isRequired
 	  },
 	  render: function render() {
 	    var _this = this;
@@ -47497,7 +47515,8 @@
 	      _react2.default.createElement(
 	        "div",
 	        { className: "school-filter" },
-	        "School",
+	        "School ",
+	        _react2.default.createElement("br", null),
 	        _react2.default.createElement(
 	          "select",
 	          { onChange: function onChange(evt) {
@@ -47553,7 +47572,8 @@
 	      _react2.default.createElement(
 	        "div",
 	        { className: "class-filter" },
-	        "Class",
+	        "Class ",
+	        _react2.default.createElement("br", null),
 	        _react2.default.createElement(
 	          "select",
 	          { onChange: function onChange(evt) {
@@ -47625,7 +47645,55 @@
 	          onChange: function onChange(evt) {
 	            return _this.props.onRitualChange(evt.target.checked);
 	          } }),
-	        " Only spells which can be cast as aritual",
+	        " Ritual only",
+	        _react2.default.createElement("br", null)
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "duration-filter" },
+	        _react2.default.createElement(
+	          "select",
+	          { onChange: function onChange(evt) {
+	              return _this.props.onDurationChange(evt.target.value);
+	            } },
+	          _react2.default.createElement(
+	            "option",
+	            { value: "all" },
+	            "All durations"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "instantaneous" },
+	            "Instantaneous"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "hour" },
+	            "Hours"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "minute" },
+	            "Minutes"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "day" },
+	            "Days"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "round" },
+	            "Rounds"
+	          )
+	        ),
+	        _react2.default.createElement("br", null),
+	        _react2.default.createElement("input", { type: "checkbox",
+	          name: "concentration",
+	          onChange: function onChange(evt) {
+	            return _this.props.onConcentrationChange(evt.target.checked);
+	          } }),
+	        " Concentration only",
 	        _react2.default.createElement("br", null)
 	      )
 	    );

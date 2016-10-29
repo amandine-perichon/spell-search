@@ -11,7 +11,9 @@ export default React.createClass({
       ritual: null,
       spellClass: null,
       name: null,
-      state: null
+      state: null,
+      duration: null,
+      concentration: null,
     }
   },
   onSchoolChange (school) {
@@ -32,6 +34,12 @@ export default React.createClass({
   onLevelChange (level) {
     this.setState({level: level!=="" ? level : null})
   },
+  onDurationChange (duration) {
+    this.setState({duration: duration!=="all" ? duration : null})
+  },
+  onConcentrationChange (concentration) {
+    this.setState({concentration: concentration? concentration: null})
+  },
   render () {
     return (
       <div>
@@ -45,6 +53,8 @@ export default React.createClass({
                       onClassChange={this.onClassChange}
                       onNameChange={this.onNameChange}
                       onLevelChange={this.onLevelChange}
+                      onDurationChange={this.onDurationChange}
+                      onConcentrationChange={this.onConcentrationChange}
                       />
           <SpellsContainer school={this.state.school}
                            spellClass={this.state.spellClass}
@@ -52,6 +62,8 @@ export default React.createClass({
                            ritual={this.state.ritual}
                            name={this.state.name}
                            level={this.state.level}
+                           duration={this.state.duration}
+                           concentration={this.state.concentration}
                            />
         </div>
         <footer>Work in progress... on Github: https://github.com/amandine-perichon/spell-search</footer>
