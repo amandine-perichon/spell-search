@@ -42596,7 +42596,8 @@
 	      name: null,
 	      state: null,
 	      duration: null,
-	      concentration: null
+	      concentration: null,
+	      range: null
 	    };
 	  },
 	  onSchoolChange: function onSchoolChange(school) {
@@ -42623,6 +42624,9 @@
 	  onConcentrationChange: function onConcentrationChange(concentration) {
 	    this.setState({ concentration: concentration ? concentration : null });
 	  },
+	  onRangeChange: function onRangeChange(range) {
+	    this.setState({ range: range !== "all" ? range : null });
+	  },
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
@@ -42646,7 +42650,8 @@
 	          onNameChange: this.onNameChange,
 	          onLevelChange: this.onLevelChange,
 	          onDurationChange: this.onDurationChange,
-	          onConcentrationChange: this.onConcentrationChange
+	          onConcentrationChange: this.onConcentrationChange,
+	          onRangeChange: this.onRangeChange
 	        }),
 	        _react2.default.createElement(_SpellsContainer2.default, { school: this.state.school,
 	          spellClass: this.state.spellClass,
@@ -42655,7 +42660,8 @@
 	          name: this.state.name,
 	          level: this.state.level,
 	          duration: this.state.duration,
-	          concentration: this.state.concentration
+	          concentration: this.state.concentration,
+	          range: this.state.range
 	        })
 	      ),
 	      _react2.default.createElement(
@@ -42677,7 +42683,7 @@
 	  value: true
 	});
 	
-	var _templateObject = _taggedTemplateLiteral(['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}'], ['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}']);
+	var _templateObject = _taggedTemplateLiteral(['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}'], ['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}']);
 	
 	var _reactApollo = __webpack_require__(238);
 	
@@ -42704,7 +42710,8 @@
 	        name = _ref.name,
 	        level = _ref.level,
 	        duration = _ref.duration,
-	        concentration = _ref.concentration;
+	        concentration = _ref.concentration,
+	        range = _ref.range;
 	
 	    return { variables: {
 	        school: school,
@@ -42714,7 +42721,8 @@
 	        name: name,
 	        level: level,
 	        duration: duration,
-	        concentration: concentration
+	        concentration: concentration,
+	        range: range
 	      }
 	    };
 	  }
@@ -47476,7 +47484,8 @@
 	    onNameChange: _react2.default.PropTypes.func.isRequired,
 	    onLevelChange: _react2.default.PropTypes.func.isRequired,
 	    onDurationChange: _react2.default.PropTypes.func.isRequired,
-	    onConcentrationChange: _react2.default.PropTypes.func.isRequired
+	    onConcentrationChange: _react2.default.PropTypes.func.isRequired,
+	    onRangeChange: _react2.default.PropTypes.func.isRequired
 	  },
 	  render: function render() {
 	    var _this = this;
@@ -47695,10 +47704,79 @@
 	          } }),
 	        " Concentration only",
 	        _react2.default.createElement("br", null)
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "range-filter" },
+	        _react2.default.createElement(
+	          "select",
+	          { onChange: function onChange(evt) {
+	              return _this.props.onRangeChange(evt.target.value);
+	            } },
+	          _react2.default.createElement(
+	            "option",
+	            { value: "all" },
+	            "All ranges"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "touch" },
+	            "Touch"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "self" },
+	            "Self"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "sight" },
+	            "Sight"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "300 feet" },
+	            "300 feet"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "150 feet" },
+	            "150 feet"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "120 feet" },
+	            "120 feet"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "90 feet" },
+	            "90 feet"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "60 feet" },
+	            "60 feet"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "30 feet" },
+	            "30 feet"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "10 feet" },
+	            "10 feet"
+	          )
+	        )
 	      )
 	    );
 	  }
 	});
+	
+	// casting_time
+	// components
+	// description
 
 /***/ }
 /******/ ]);

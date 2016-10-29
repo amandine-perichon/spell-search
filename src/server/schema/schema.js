@@ -89,6 +89,8 @@ const Spell = new GraphQLObjectType({
   })
 })
 
+// to do: Add area of effect YES NO
+
 const Query = new GraphQLObjectType({
   name: "RootQuery",
   fields: {

@@ -9,7 +9,8 @@ export default React.createClass({
     onNameChange: React.PropTypes.func.isRequired,
     onLevelChange: React.PropTypes.func.isRequired,
     onDurationChange: React.PropTypes.func.isRequired,
-    onConcentrationChange: React.PropTypes.func.isRequired
+    onConcentrationChange: React.PropTypes.func.isRequired,
+    onRangeChange: React.PropTypes.func.isRequired
   },
   render () {
   return (
@@ -76,7 +77,26 @@ export default React.createClass({
                name="concentration"
                onChange={evt => this.props.onConcentrationChange(evt.target.checked)}/> Concentration only<br />
       </div>
+      <div className="range-filter">
+        <select onChange={evt => this.props.onRangeChange(evt.target.value)}>
+          <option value="all">All ranges</option>
+          <option value="touch">Touch</option>
+          <option value="self">Self</option>
+          <option value="sight">Sight</option>
+          <option value="300 feet">300 feet</option>
+          <option value="150 feet">150 feet</option>
+          <option value="120 feet">120 feet</option>
+          <option value="90 feet">90 feet</option>
+          <option value="60 feet">60 feet</option>
+          <option value="30 feet">30 feet</option>
+          <option value="10 feet">10 feet</option>
+        </select>
+      </div>
     </div>
   )
   }
 })
+
+// casting_time
+// components
+// description
