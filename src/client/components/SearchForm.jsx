@@ -11,7 +11,8 @@ export default React.createClass({
     onDurationChange: React.PropTypes.func.isRequired,
     onConcentrationChange: React.PropTypes.func.isRequired,
     onRangeChange: React.PropTypes.func.isRequired,
-    onCastingChange: React.PropTypes.func.isRequired
+    onCastingChange: React.PropTypes.func.isRequired,
+    onDescriptionChange: React.PropTypes.func.isRequired
   },
   render () {
   return (
@@ -22,13 +23,28 @@ export default React.createClass({
                name="name"
                onChange={evt => this.props.onNameChange(evt.target.value)} />
       </div>
-      <div className="level-filter">
-        <label htmlFor="level">Level </label>
+      <div className="description-filter">
+        <label htmlFor="description">Description </label>
         <input type="text"
-               name="level"
-               onChange={evt => this.props.onLevelChange(evt.target.value)} />
+               name="description"
+               onChange={evt => this.props.onDescriptionChange(evt.target.value)} />
       </div>
-      <div className="school-filter">School <br />
+      <div className="level-filter">
+        <select onChange={evt => this.props.onLevelChange(evt.target.value)}>
+          <option value="all">All levels</option>
+          <option value="cantrip">Cantrip</option>
+          <option value="1">level 1</option>
+          <option value="2">level 2</option>
+          <option value="3">level 3</option>
+          <option value="4">level 4</option>
+          <option value="5">level 5</option>
+          <option value="6">level 6</option>
+          <option value="7">level 7</option>
+          <option value="8">level 8</option>
+          <option value="9">level 9</option>
+        </select>
+      </div>
+      <div className="school-filter">
         <select onChange={evt => this.props.onSchoolChange(evt.target.value)}>
           <option value="all">All schools</option>
           <option value="abjuration">Abjuration</option>
@@ -41,7 +57,7 @@ export default React.createClass({
           <option value="transmutation">Transmutation</option>
         </select>
       </div>
-      <div className="class-filter">Class <br />
+      <div className="class-filter">
         <select onChange={evt => this.props.onClassChange(evt.target.value)}>
           <option value="all">All classes</option>
           <option value="bard">Bard</option>
@@ -57,7 +73,7 @@ export default React.createClass({
       <div className="higher-levels-filter">
         <input type="checkbox"
                name="higher_levels"
-               onChange={evt => this.props.onHigherLevelChange(evt.target.checked)}/> Only spells which scales at higher level<br />
+               onChange={evt => this.props.onHigherLevelChange(evt.target.checked)}/> Higher level description only<br />
       </div>
       <div>
         <input type="checkbox"
@@ -108,4 +124,3 @@ export default React.createClass({
 })
 
 // components
-// description

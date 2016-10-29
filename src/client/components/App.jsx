@@ -15,7 +15,8 @@ export default React.createClass({
       duration: null,
       concentration: null,
       range: null,
-      castingTime: null
+      castingTime: null,
+      description: null
     }
   },
   onSchoolChange (school) {
@@ -48,6 +49,9 @@ export default React.createClass({
   onCastingChange (castingTime) {
     this.setState({castingTime: castingTime!=="all" ? castingTime : null})
   },
+  onDescriptionChange (description) {
+    this.setState({description: description!=="" ? description : null})
+  },
   render () {
     return (
       <div>
@@ -65,6 +69,7 @@ export default React.createClass({
                       onConcentrationChange={this.onConcentrationChange}
                       onRangeChange={this.onRangeChange}
                       onCastingChange={this.onCastingChange}
+                      onDescriptionChange={this.onDescriptionChange}
                       />
           <SpellsContainer school={this.state.school}
                            spellClass={this.state.spellClass}
@@ -76,6 +81,7 @@ export default React.createClass({
                            concentration={this.state.concentration}
                            range={this.state.range}
                            castingTime={this.state.castingTime}
+                           description={this.state.description}
                            />
         </div>
         <footer>Work in progress... on Github: https://github.com/amandine-perichon/spell-search</footer>

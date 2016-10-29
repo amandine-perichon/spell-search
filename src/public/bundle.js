@@ -42598,7 +42598,8 @@
 	      duration: null,
 	      concentration: null,
 	      range: null,
-	      castingTime: null
+	      castingTime: null,
+	      description: null
 	    };
 	  },
 	  onSchoolChange: function onSchoolChange(school) {
@@ -42631,6 +42632,9 @@
 	  onCastingChange: function onCastingChange(castingTime) {
 	    this.setState({ castingTime: castingTime !== "all" ? castingTime : null });
 	  },
+	  onDescriptionChange: function onDescriptionChange(description) {
+	    this.setState({ description: description !== "" ? description : null });
+	  },
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
@@ -42656,7 +42660,8 @@
 	          onDurationChange: this.onDurationChange,
 	          onConcentrationChange: this.onConcentrationChange,
 	          onRangeChange: this.onRangeChange,
-	          onCastingChange: this.onCastingChange
+	          onCastingChange: this.onCastingChange,
+	          onDescriptionChange: this.onDescriptionChange
 	        }),
 	        _react2.default.createElement(_SpellsContainer2.default, { school: this.state.school,
 	          spellClass: this.state.spellClass,
@@ -42667,7 +42672,8 @@
 	          duration: this.state.duration,
 	          concentration: this.state.concentration,
 	          range: this.state.range,
-	          castingTime: this.state.castingTime
+	          castingTime: this.state.castingTime,
+	          description: this.state.description
 	        })
 	      ),
 	      _react2.default.createElement(
@@ -42689,7 +42695,7 @@
 	  value: true
 	});
 	
-	var _templateObject = _taggedTemplateLiteral(['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String, $castingTime: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range, casting_time: $castingTime) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}'], ['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String, $castingTime: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range, casting_time: $castingTime) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}']);
+	var _templateObject = _taggedTemplateLiteral(['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String, $castingTime: String, $description: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range, casting_time: $castingTime, description: $description) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}'], ['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String, $castingTime: String, $description: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range, casting_time: $castingTime, description: $description) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}']);
 	
 	var _reactApollo = __webpack_require__(238);
 	
@@ -42718,7 +42724,8 @@
 	        duration = _ref.duration,
 	        concentration = _ref.concentration,
 	        range = _ref.range,
-	        castingTime = _ref.castingTime;
+	        castingTime = _ref.castingTime,
+	        description = _ref.description;
 	
 	    return { variables: {
 	        school: school,
@@ -42730,7 +42737,8 @@
 	        duration: duration,
 	        concentration: concentration,
 	        range: range,
-	        castingTime: castingTime
+	        castingTime: castingTime,
+	        description: description
 	      }
 	    };
 	  }
@@ -47494,7 +47502,8 @@
 	    onDurationChange: _react2.default.PropTypes.func.isRequired,
 	    onConcentrationChange: _react2.default.PropTypes.func.isRequired,
 	    onRangeChange: _react2.default.PropTypes.func.isRequired,
-	    onCastingChange: _react2.default.PropTypes.func.isRequired
+	    onCastingChange: _react2.default.PropTypes.func.isRequired,
+	    onDescriptionChange: _react2.default.PropTypes.func.isRequired
 	  },
 	  render: function render() {
 	    var _this = this;
@@ -47518,23 +47527,86 @@
 	      ),
 	      _react2.default.createElement(
 	        "div",
-	        { className: "level-filter" },
+	        { className: "description-filter" },
 	        _react2.default.createElement(
 	          "label",
-	          { htmlFor: "level" },
-	          "Level "
+	          { htmlFor: "description" },
+	          "Description "
 	        ),
 	        _react2.default.createElement("input", { type: "text",
-	          name: "level",
+	          name: "description",
 	          onChange: function onChange(evt) {
-	            return _this.props.onLevelChange(evt.target.value);
+	            return _this.props.onDescriptionChange(evt.target.value);
 	          } })
 	      ),
 	      _react2.default.createElement(
 	        "div",
+	        { className: "level-filter" },
+	        _react2.default.createElement(
+	          "select",
+	          { onChange: function onChange(evt) {
+	              return _this.props.onLevelChange(evt.target.value);
+	            } },
+	          _react2.default.createElement(
+	            "option",
+	            { value: "all" },
+	            "All levels"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "cantrip" },
+	            "Cantrip"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "1" },
+	            "level 1"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "2" },
+	            "level 2"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "3" },
+	            "level 3"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "4" },
+	            "level 4"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "5" },
+	            "level 5"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "6" },
+	            "level 6"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "7" },
+	            "level 7"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "8" },
+	            "level 8"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "9" },
+	            "level 9"
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        "div",
 	        { className: "school-filter" },
-	        "School ",
-	        _react2.default.createElement("br", null),
 	        _react2.default.createElement(
 	          "select",
 	          { onChange: function onChange(evt) {
@@ -47590,8 +47662,6 @@
 	      _react2.default.createElement(
 	        "div",
 	        { className: "class-filter" },
-	        "Class ",
-	        _react2.default.createElement("br", null),
 	        _react2.default.createElement(
 	          "select",
 	          { onChange: function onChange(evt) {
@@ -47652,7 +47722,7 @@
 	          onChange: function onChange(evt) {
 	            return _this.props.onHigherLevelChange(evt.target.checked);
 	          } }),
-	        " Only spells which scales at higher level",
+	        " Higher level description only",
 	        _react2.default.createElement("br", null)
 	      ),
 	      _react2.default.createElement(
@@ -47819,7 +47889,6 @@
 	});
 	
 	// components
-	// description
 
 /***/ }
 /******/ ]);
