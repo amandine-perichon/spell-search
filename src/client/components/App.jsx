@@ -23,10 +23,10 @@ export default React.createClass({
     this.setState({school: school!=="all" ? school : null})
   },
   onHigherLevelChange (higherLevels) {
-    this.setState({higherLevels: higherLevels})
+    this.setState({higherLevels: higherLevels? higherLevels: null})
   },
   onRitualChange (ritual) {
-    this.setState({ritual: ritual})
+    this.setState({ritual: ritual? ritual: null})
   },
   onClassChange (spellClass) {
     this.setState({spellClass: spellClass!=="all" ? spellClass : null})
@@ -35,7 +35,7 @@ export default React.createClass({
     this.setState({name: name!=="" ? name : null})
   },
   onLevelChange (level) {
-    this.setState({level: level!=="" ? level : null})
+    this.setState({level: level!=="all" ? level : null})
   },
   onDurationChange (duration) {
     this.setState({duration: duration!=="all" ? duration : null})
@@ -51,6 +51,21 @@ export default React.createClass({
   },
   onDescriptionChange (description) {
     this.setState({description: description!=="" ? description : null})
+  },
+  resetSearch () {
+    this.setState({
+      school: null,
+      higherLevels: null,
+      ritual: null,
+      spellClass: null,
+      name: null,
+      state: null,
+      duration: null,
+      concentration: null,
+      range: null,
+      castingTime: null,
+      description: null
+    })
   },
   render () {
     return (
@@ -71,6 +86,7 @@ export default React.createClass({
                       onCastingChange={this.onCastingChange}
                       onDescriptionChange={this.onDescriptionChange}
                       />
+          <button type="button" onClick={this.resetSearch}>Reset search filter</button>
           <SpellsContainer school={this.state.school}
                            spellClass={this.state.spellClass}
                            higherLevels={this.state.higherLevels}

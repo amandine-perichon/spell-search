@@ -11,6 +11,16 @@ header, footer {
   margin: 1rem;
 }
 
+.checkbox-filters div,
+.free-text-filters div,
+.drop-down-filters div {
+  display: inline;
+}
+
+.free-text-filters div label,
+.free-text-filters div input {
+  display: inline;
+}
 /* SPELL LIST STYLE */
 
 .spell-list {

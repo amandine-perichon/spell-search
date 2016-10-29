@@ -42606,10 +42606,10 @@
 	    this.setState({ school: school !== "all" ? school : null });
 	  },
 	  onHigherLevelChange: function onHigherLevelChange(higherLevels) {
-	    this.setState({ higherLevels: higherLevels });
+	    this.setState({ higherLevels: higherLevels ? higherLevels : null });
 	  },
 	  onRitualChange: function onRitualChange(ritual) {
-	    this.setState({ ritual: ritual });
+	    this.setState({ ritual: ritual ? ritual : null });
 	  },
 	  onClassChange: function onClassChange(spellClass) {
 	    this.setState({ spellClass: spellClass !== "all" ? spellClass : null });
@@ -42618,7 +42618,7 @@
 	    this.setState({ name: name !== "" ? name : null });
 	  },
 	  onLevelChange: function onLevelChange(level) {
-	    this.setState({ level: level !== "" ? level : null });
+	    this.setState({ level: level !== "all" ? level : null });
 	  },
 	  onDurationChange: function onDurationChange(duration) {
 	    this.setState({ duration: duration !== "all" ? duration : null });
@@ -42634,6 +42634,21 @@
 	  },
 	  onDescriptionChange: function onDescriptionChange(description) {
 	    this.setState({ description: description !== "" ? description : null });
+	  },
+	  resetSearch: function resetSearch() {
+	    this.setState({
+	      school: null,
+	      higherLevels: null,
+	      ritual: null,
+	      spellClass: null,
+	      name: null,
+	      state: null,
+	      duration: null,
+	      concentration: null,
+	      range: null,
+	      castingTime: null,
+	      description: null
+	    });
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(
@@ -42663,6 +42678,11 @@
 	          onCastingChange: this.onCastingChange,
 	          onDescriptionChange: this.onDescriptionChange
 	        }),
+	        _react2.default.createElement(
+	          'button',
+	          { type: 'button', onClick: this.resetSearch },
+	          'Reset search filter'
+	        ),
 	        _react2.default.createElement(_SpellsContainer2.default, { school: this.state.school,
 	          spellClass: this.state.spellClass,
 	          higherLevels: this.state.higherLevels,
@@ -47513,382 +47533,392 @@
 	      { className: "search-form" },
 	      _react2.default.createElement(
 	        "div",
-	        { className: "name-filter" },
+	        { className: "free-text-filters" },
 	        _react2.default.createElement(
-	          "label",
-	          { htmlFor: "name" },
-	          "Name "
+	          "div",
+	          { className: "name-filter" },
+	          _react2.default.createElement(
+	            "label",
+	            { htmlFor: "name" },
+	            "Name "
+	          ),
+	          _react2.default.createElement("input", { type: "text",
+	            name: "name",
+	            onChange: function onChange(evt) {
+	              return _this.props.onNameChange(evt.target.value);
+	            } })
 	        ),
-	        _react2.default.createElement("input", { type: "text",
-	          name: "name",
-	          onChange: function onChange(evt) {
-	            return _this.props.onNameChange(evt.target.value);
-	          } })
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        { className: "description-filter" },
 	        _react2.default.createElement(
-	          "label",
-	          { htmlFor: "description" },
-	          "Description "
-	        ),
-	        _react2.default.createElement("input", { type: "text",
-	          name: "description",
-	          onChange: function onChange(evt) {
-	            return _this.props.onDescriptionChange(evt.target.value);
-	          } })
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        { className: "level-filter" },
-	        _react2.default.createElement(
-	          "select",
-	          { onChange: function onChange(evt) {
-	              return _this.props.onLevelChange(evt.target.value);
-	            } },
+	          "div",
+	          { className: "description-filter" },
 	          _react2.default.createElement(
-	            "option",
-	            { value: "all" },
-	            "All levels"
+	            "label",
+	            { htmlFor: "description" },
+	            "Description "
 	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "cantrip" },
-	            "Cantrip"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "1" },
-	            "level 1"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "2" },
-	            "level 2"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "3" },
-	            "level 3"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "4" },
-	            "level 4"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "5" },
-	            "level 5"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "6" },
-	            "level 6"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "7" },
-	            "level 7"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "8" },
-	            "level 8"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "9" },
-	            "level 9"
-	          )
+	          _react2.default.createElement("input", { type: "text",
+	            name: "description",
+	            onChange: function onChange(evt) {
+	              return _this.props.onDescriptionChange(evt.target.value);
+	            } })
 	        )
 	      ),
 	      _react2.default.createElement(
 	        "div",
-	        { className: "school-filter" },
+	        { className: "drop-down-filters" },
 	        _react2.default.createElement(
-	          "select",
-	          { onChange: function onChange(evt) {
-	              return _this.props.onSchoolChange(evt.target.value);
-	            } },
+	          "div",
+	          { className: "level-filter" },
 	          _react2.default.createElement(
-	            "option",
-	            { value: "all" },
-	            "All schools"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "abjuration" },
-	            "Abjuration"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "conjuration" },
-	            "Conjuration"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "divination" },
-	            "Divination"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "enchantment" },
-	            "Enchantment"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "evocation" },
-	            "Evocation"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "illusion" },
-	            "Illusion"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "necromancy" },
-	            "Necromancy"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "transmutation" },
-	            "Transmutation"
-	          )
-	        )
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        { className: "class-filter" },
-	        _react2.default.createElement(
-	          "select",
-	          { onChange: function onChange(evt) {
-	              return _this.props.onClassChange(evt.target.value);
-	            } },
-	          _react2.default.createElement(
-	            "option",
-	            { value: "all" },
-	            "All classes"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "bard" },
-	            "Bard"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "cleric" },
-	            "Cleric"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "druid" },
-	            "Druid"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "paladin" },
-	            "Paladin"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "ranger" },
-	            "Ranger"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "sorcerer" },
-	            "Sorcerer"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "warlock" },
-	            "Warlock"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "wizard" },
-	            "Wizard"
-	          )
-	        )
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        { className: "higher-levels-filter" },
-	        _react2.default.createElement("input", { type: "checkbox",
-	          name: "higher_levels",
-	          onChange: function onChange(evt) {
-	            return _this.props.onHigherLevelChange(evt.target.checked);
-	          } }),
-	        " Higher level description only",
-	        _react2.default.createElement("br", null)
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        null,
-	        _react2.default.createElement("input", { type: "checkbox",
-	          name: "ritual",
-	          onChange: function onChange(evt) {
-	            return _this.props.onRitualChange(evt.target.checked);
-	          } }),
-	        " Ritual only",
-	        _react2.default.createElement("br", null)
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        { className: "duration-filter" },
-	        _react2.default.createElement(
-	          "select",
-	          { onChange: function onChange(evt) {
-	              return _this.props.onDurationChange(evt.target.value);
-	            } },
-	          _react2.default.createElement(
-	            "option",
-	            { value: "all" },
-	            "All durations"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "instantaneous" },
-	            "Instantaneous"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "hour" },
-	            "Hours"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "minute" },
-	            "Minutes"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "day" },
-	            "Days"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "round" },
-	            "Rounds"
+	            "select",
+	            { onChange: function onChange(evt) {
+	                return _this.props.onLevelChange(evt.target.value);
+	              } },
+	            _react2.default.createElement(
+	              "option",
+	              { value: "all" },
+	              "All levels"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "cantrip" },
+	              "Cantrip"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "1" },
+	              "level 1"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "2" },
+	              "level 2"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "3" },
+	              "level 3"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "4" },
+	              "level 4"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "5" },
+	              "level 5"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "6" },
+	              "level 6"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "7" },
+	              "level 7"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "8" },
+	              "level 8"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "9" },
+	              "level 9"
+	            )
 	          )
 	        ),
-	        _react2.default.createElement("br", null),
-	        _react2.default.createElement("input", { type: "checkbox",
-	          name: "concentration",
-	          onChange: function onChange(evt) {
-	            return _this.props.onConcentrationChange(evt.target.checked);
-	          } }),
-	        " Concentration only",
-	        _react2.default.createElement("br", null)
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        { className: "range-filter" },
 	        _react2.default.createElement(
-	          "select",
-	          { onChange: function onChange(evt) {
-	              return _this.props.onRangeChange(evt.target.value);
-	            } },
+	          "div",
+	          { className: "school-filter" },
 	          _react2.default.createElement(
-	            "option",
-	            { value: "all" },
-	            "All ranges"
-	          ),
+	            "select",
+	            { onChange: function onChange(evt) {
+	                return _this.props.onSchoolChange(evt.target.value);
+	              } },
+	            _react2.default.createElement(
+	              "option",
+	              { value: "all" },
+	              "All schools"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "abjuration" },
+	              "Abjuration"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "conjuration" },
+	              "Conjuration"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "divination" },
+	              "Divination"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "enchantment" },
+	              "Enchantment"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "evocation" },
+	              "Evocation"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "illusion" },
+	              "Illusion"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "necromancy" },
+	              "Necromancy"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "transmutation" },
+	              "Transmutation"
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "class-filter" },
 	          _react2.default.createElement(
-	            "option",
-	            { value: "touch" },
-	            "Touch"
-	          ),
+	            "select",
+	            { onChange: function onChange(evt) {
+	                return _this.props.onClassChange(evt.target.value);
+	              } },
+	            _react2.default.createElement(
+	              "option",
+	              { value: "all" },
+	              "All classes"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "bard" },
+	              "Bard"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "cleric" },
+	              "Cleric"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "druid" },
+	              "Druid"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "paladin" },
+	              "Paladin"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "ranger" },
+	              "Ranger"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "sorcerer" },
+	              "Sorcerer"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "warlock" },
+	              "Warlock"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "wizard" },
+	              "Wizard"
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "duration-filter" },
 	          _react2.default.createElement(
-	            "option",
-	            { value: "self" },
-	            "Self"
-	          ),
+	            "select",
+	            { onChange: function onChange(evt) {
+	                return _this.props.onDurationChange(evt.target.value);
+	              } },
+	            _react2.default.createElement(
+	              "option",
+	              { value: "all" },
+	              "All durations"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "instantaneous" },
+	              "Instantaneous"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "hour" },
+	              "Hours"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "minute" },
+	              "Minutes"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "day" },
+	              "Days"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "round" },
+	              "Rounds"
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "range-filter" },
 	          _react2.default.createElement(
-	            "option",
-	            { value: "sight" },
-	            "Sight"
-	          ),
+	            "select",
+	            { onChange: function onChange(evt) {
+	                return _this.props.onRangeChange(evt.target.value);
+	              } },
+	            _react2.default.createElement(
+	              "option",
+	              { value: "all" },
+	              "All ranges"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "touch" },
+	              "Touch"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "self" },
+	              "Self"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "sight" },
+	              "Sight"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "300 feet" },
+	              "300 feet"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "150 feet" },
+	              "150 feet"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "120 feet" },
+	              "120 feet"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "90 feet" },
+	              "90 feet"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "60 feet" },
+	              "60 feet"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "30 feet" },
+	              "30 feet"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "10 feet" },
+	              "10 feet"
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "casting-time-filter" },
 	          _react2.default.createElement(
-	            "option",
-	            { value: "300 feet" },
-	            "300 feet"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "150 feet" },
-	            "150 feet"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "120 feet" },
-	            "120 feet"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "90 feet" },
-	            "90 feet"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "60 feet" },
-	            "60 feet"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "30 feet" },
-	            "30 feet"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "10 feet" },
-	            "10 feet"
+	            "select",
+	            { onChange: function onChange(evt) {
+	                return _this.props.onCastingChange(evt.target.value);
+	              } },
+	            _react2.default.createElement(
+	              "option",
+	              { value: "all" },
+	              "All casting times"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "bonus" },
+	              "Bonus"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "reaction" },
+	              "Reaction"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "action" },
+	              "Action"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "minute" },
+	              "Minutes"
+	            )
 	          )
 	        )
 	      ),
 	      _react2.default.createElement(
 	        "div",
-	        { className: "casting-time-filter" },
+	        { className: "checkbox-filters" },
 	        _react2.default.createElement(
-	          "select",
-	          { onChange: function onChange(evt) {
-	              return _this.props.onCastingChange(evt.target.value);
-	            } },
-	          _react2.default.createElement(
-	            "option",
-	            { value: "all" },
-	            "All casting times"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "bonus" },
-	            "Bonus"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "reaction" },
-	            "Reaction"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "action" },
-	            "Action"
-	          ),
-	          _react2.default.createElement(
-	            "option",
-	            { value: "minute" },
-	            "Minutes"
-	          )
+	          "div",
+	          { className: "higher-levels-filter" },
+	          _react2.default.createElement("input", { type: "checkbox",
+	            name: "higher_levels",
+	            onChange: function onChange(evt) {
+	              return _this.props.onHigherLevelChange(evt.target.checked);
+	            } }),
+	          " Higher level description only"
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "ritual-filter" },
+	          _react2.default.createElement("input", { type: "checkbox",
+	            name: "ritual",
+	            onChange: function onChange(evt) {
+	              return _this.props.onRitualChange(evt.target.checked);
+	            } }),
+	          " Ritual only"
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "concentration-filter" },
+	          _react2.default.createElement("input", { type: "checkbox",
+	            name: "concentration",
+	            onChange: function onChange(evt) {
+	              return _this.props.onConcentrationChange(evt.target.checked);
+	            } }),
+	          " Concentration only"
 	        )
 	      )
 	    );
 	  }
 	});
-	
-	// components
 
 /***/ }
 /******/ ]);
