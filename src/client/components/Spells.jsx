@@ -13,7 +13,8 @@ export default React.createClass({
     const spellList= spells? spells.map(elem => <Spell key={elem._id} spell={elem} />): null
     return (
           <div className="spell-list">
-            {loading ? <div className="loader"></div> : spellList}
+            {loading ? <div className="loader"></div> :
+            <div><div>Your search returned {spells.length} results</div><div>{spellList}</div></div>}
           </div>
     )
   }

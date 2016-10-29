@@ -22,6 +22,7 @@ function listAllSpells () {
 }
 
 function findSpells (params) {
+  console.log("before transformation", params)
   let query = Object.assign({}, params)
   if (params.class) {
     query = Object.assign({}, query, {classes: { "$in" : [params.class]}})
@@ -31,7 +32,11 @@ function findSpells (params) {
     query = Object.assign({}, query, {name: {$regex: params.name, $options: "$i"}})
   }
   if (params.hasOwnProperty('higher_levels')) {
-    query = Object.assign({}, query, {higher_levels: {$exists: true}})
+    if (params.higher_levels) {
+      query = Object.assign({}, query, {higher_levels: {$exists: true}})
+    } else {
+      delete query.higher_levels
+    }
   }
   if (params.hasOwnProperty('instantaneous')) {
     if (params.instantaneous) {
@@ -69,7 +74,7 @@ function findSpells (params) {
     query = Object.assign({}, query, queryParams)
     delete query.component_type
   }
-  console.log(query)
+  console.log("after transformation", query)
   return spellCollection.find(query)
 }
 

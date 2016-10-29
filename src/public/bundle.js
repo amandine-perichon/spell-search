@@ -42575,11 +42575,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SpellsContainer = __webpack_require__(248);
+	var _SpellsContainer = __webpack_require__(247);
 	
 	var _SpellsContainer2 = _interopRequireDefault(_SpellsContainer);
 	
-	var _SearchForm = __webpack_require__(247);
+	var _SearchForm = __webpack_require__(252);
 	
 	var _SearchForm2 = _interopRequireDefault(_SearchForm);
 	
@@ -42589,11 +42589,19 @@
 	  displayName: 'App',
 	  getInitialState: function getInitialState() {
 	    return {
-	      school: ""
+	      school: null,
+	      higherLevels: null,
+	      ritual: null
 	    };
 	  },
 	  onSchoolChange: function onSchoolChange(school) {
-	    this.setState({ school: school });
+	    this.setState({ school: school !== "all" ? school : null });
+	  },
+	  onHigherLevelChange: function onHigherLevelChange(higherLevels) {
+	    this.setState({ higherLevels: higherLevels });
+	  },
+	  onRitualChange: function onRitualChange(ritual) {
+	    this.setState({ ritual: ritual });
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(
@@ -42611,13 +42619,19 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'container' },
-	        _react2.default.createElement(_SearchForm2.default, { onSchoolChange: this.onSchoolChange }),
-	        _react2.default.createElement(_SpellsContainer2.default, { school: this.state.school })
+	        _react2.default.createElement(_SearchForm2.default, { onSchoolChange: this.onSchoolChange,
+	          onHigherLevelChange: this.onHigherLevelChange,
+	          onRitualChange: this.onRitualChange
+	        }),
+	        _react2.default.createElement(_SpellsContainer2.default, { school: this.state.school,
+	          higherLevels: this.state.higherLevels,
+	          ritual: this.state.ritual
+	        })
 	      ),
 	      _react2.default.createElement(
 	        'footer',
 	        null,
-	        'Work in progress...'
+	        'Work in progress... on Github: https://github.com/amandine-perichon/spell-search'
 	      )
 	    );
 	  }
@@ -42627,104 +42641,21 @@
 /* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = _react2.default.createClass({
-	  displayName: "SearchForm",
-	
-	  props: {
-	    onSchoolChange: _react2.default.PropTypes.func.isRequired
-	  },
-	  render: function render() {
-	    var _this = this;
-	
-	    return _react2.default.createElement(
-	      "div",
-	      { className: "search-form" },
-	      _react2.default.createElement(
-	        "div",
-	        null,
-	        "Pick a school"
-	      ),
-	      _react2.default.createElement(
-	        "select",
-	        { onChange: function onChange(evt) {
-	            return _this.props.onSchoolChange(evt.target.value);
-	          } },
-	        _react2.default.createElement(
-	          "option",
-	          { value: "abjuration" },
-	          "Abjuration"
-	        ),
-	        _react2.default.createElement(
-	          "option",
-	          { value: "conjuration" },
-	          "Conjuration"
-	        ),
-	        _react2.default.createElement(
-	          "option",
-	          { value: "divination" },
-	          "Divination"
-	        ),
-	        _react2.default.createElement(
-	          "option",
-	          { value: "enchantment" },
-	          "Enchantment"
-	        ),
-	        _react2.default.createElement(
-	          "option",
-	          { value: "evocation" },
-	          "Evocation"
-	        ),
-	        _react2.default.createElement(
-	          "option",
-	          { value: "illusion" },
-	          "Illusion"
-	        ),
-	        _react2.default.createElement(
-	          "option",
-	          { value: "necromancy" },
-	          "Necromancy"
-	        ),
-	        _react2.default.createElement(
-	          "option",
-	          { value: "transmutation" },
-	          "Transmutation"
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 248 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
-	var _templateObject = _taggedTemplateLiteral(['query SpellSearch ($school: school) {\n  spells (school: $school) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}'], ['query SpellSearch ($school: school) {\n  spells (school: $school) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}']);
+	var _templateObject = _taggedTemplateLiteral(['query SpellSearch ($school: school, $higherLevels: Boolean, $ritual: Boolean) {\n  spells (school: $school, higher_levels: $higherLevels, ritual: $ritual) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}'], ['query SpellSearch ($school: school, $higherLevels: Boolean, $ritual: Boolean) {\n  spells (school: $school, higher_levels: $higherLevels, ritual: $ritual) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}']);
 	
 	var _reactApollo = __webpack_require__(238);
 	
-	var _graphqlTag = __webpack_require__(249);
+	var _graphqlTag = __webpack_require__(248);
 	
 	var _graphqlTag2 = _interopRequireDefault(_graphqlTag);
 	
-	var _Spells = __webpack_require__(251);
+	var _Spells = __webpack_require__(250);
 	
 	var _Spells2 = _interopRequireDefault(_Spells);
 	
@@ -42736,16 +42667,18 @@
 	
 	exports.default = (0, _reactApollo.graphql)(SpellQuery, {
 	  options: function options(_ref) {
-	    var school = _ref.school;
-	    return { variables: { school: school } };
+	    var school = _ref.school,
+	        higherLevels = _ref.higherLevels,
+	        ritual = _ref.ritual;
+	    return { variables: { school: school, higherLevels: higherLevels, ritual: ritual } };
 	  }
 	})(_Spells2.default);
 
 /***/ },
-/* 249 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var parse = __webpack_require__(250).parse;
+	var parse = __webpack_require__(249).parse;
 	
 	var cache = {};
 	
@@ -42830,7 +42763,7 @@
 
 
 /***/ },
-/* 250 */
+/* 249 */
 /***/ function(module, exports) {
 
 	module.exports =
@@ -47258,7 +47191,7 @@
 	/******/ ]);
 
 /***/ },
-/* 251 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47271,11 +47204,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Spell = __webpack_require__(252);
+	var _Spell = __webpack_require__(251);
 	
 	var _Spell2 = _interopRequireDefault(_Spell);
 	
-	var _SearchForm = __webpack_require__(247);
+	var _SearchForm = __webpack_require__(252);
 	
 	var _SearchForm2 = _interopRequireDefault(_SearchForm);
 	
@@ -47296,13 +47229,28 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'spell-list' },
-	      loading ? _react2.default.createElement('div', { className: 'loader' }) : spellList
+	      loading ? _react2.default.createElement('div', { className: 'loader' }) : _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'Your search returned ',
+	          spells.length,
+	          ' results'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          spellList
+	        )
+	      )
 	    );
 	  }
 	});
 
 /***/ },
-/* 252 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -47385,7 +47333,7 @@
 	            spell.classes.map(function (elem) {
 	              return _react2.default.createElement(
 	                "span",
-	                null,
+	                { key: elem },
 	                elem,
 	                " "
 	              );
@@ -47431,14 +47379,137 @@
 	        _react2.default.createElement(
 	          "div",
 	          null,
-	          "Description: ",
+	          _react2.default.createElement(
+	            "strong",
+	            null,
+	            "Description"
+	          ),
+	          ": ",
 	          spell.description
 	        ),
-	        _react2.default.createElement(
+	        spell.higher_levels ? _react2.default.createElement(
 	          "div",
 	          null,
-	          spell.higher_levels ? "Higher Levels: " + spell.higher_levels : null
+	          _react2.default.createElement(
+	            "strong",
+	            null,
+	            "Higher Levels"
+	          ),
+	          ": ",
+	          spell.higher_levels
+	        ) : null
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 252 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = _react2.default.createClass({
+	  displayName: "SearchForm",
+	
+	  props: {
+	    onSchoolChange: _react2.default.PropTypes.func.isRequired,
+	    onHigherLevelChange: _react2.default.PropTypes.func.isRequired,
+	    onRitualChange: _react2.default.PropTypes.func.isRequired
+	  },
+	  render: function render() {
+	    var _this = this;
+	
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "search-form" },
+	      _react2.default.createElement(
+	        "div",
+	        { className: "school-filter" },
+	        "School",
+	        _react2.default.createElement(
+	          "select",
+	          { onChange: function onChange(evt) {
+	              return _this.props.onSchoolChange(evt.target.value);
+	            } },
+	          _react2.default.createElement(
+	            "option",
+	            { value: "all" },
+	            "All schools"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "abjuration" },
+	            "Abjuration"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "conjuration" },
+	            "Conjuration"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "divination" },
+	            "Divination"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "enchantment" },
+	            "Enchantment"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "evocation" },
+	            "Evocation"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "illusion" },
+	            "Illusion"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "necromancy" },
+	            "Necromancy"
+	          ),
+	          _react2.default.createElement(
+	            "option",
+	            { value: "transmutation" },
+	            "Transmutation"
+	          )
 	        )
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "higher-levels-filter" },
+	        _react2.default.createElement("input", { type: "checkbox",
+	          name: "higher_levels",
+	          onChange: function onChange(evt) {
+	            return _this.props.onHigherLevelChange(evt.target.checked);
+	          } }),
+	        " Only spells which scales at higher level",
+	        _react2.default.createElement("br", null)
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        null,
+	        _react2.default.createElement("input", { type: "checkbox",
+	          name: "ritual",
+	          onChange: function onChange(evt) {
+	            return _this.props.onRitualChange(evt.target.checked);
+	          } }),
+	        " Only spells which can be cast as aritual",
+	        _react2.default.createElement("br", null)
 	      )
 	    );
 	  }

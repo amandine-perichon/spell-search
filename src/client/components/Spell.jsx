@@ -20,7 +20,7 @@ export default React.createClass({
             <div>{spell.ritual? `Ritual: ${spell.ritual}`: null}</div>
           </div>
           <div className="one-third column">
-            <div>Classes: {spell.classes.map((elem) => <span>{elem} </span>)}</div>
+            <div>Classes: {spell.classes.map((elem) => <span key={elem}>{elem} </span>)}</div>
           </div>
           <div className="one-third column">
             <div>Components:
@@ -33,8 +33,8 @@ export default React.createClass({
           </div>
         </div>
         <div className="row spell-description">
-          <div>Description: {spell.description}</div>
-          <div>{spell.higher_levels? `Higher Levels: ${spell.higher_levels}`: null}</div>
+          <div><strong>Description</strong>: {spell.description}</div>
+          {spell.higher_levels? <div><strong>Higher Levels</strong>: {spell.higher_levels}</div>: null}
         </div>
       </div>
     )

@@ -6,11 +6,19 @@ import SearchForm from './SearchForm'
 export default React.createClass({
   getInitialState () {
     return {
-      school: ""
+      school: null,
+      higherLevels: null,
+      ritual: null
     }
   },
   onSchoolChange (school) {
-    this.setState({school: school})
+    this.setState({school: school!=="all" ? school : null})
+  },
+  onHigherLevelChange (higherLevels) {
+    this.setState({higherLevels: higherLevels})
+  },
+  onRitualChange (ritual) {
+    this.setState({ritual: ritual})
   },
   render () {
     return (
@@ -19,10 +27,16 @@ export default React.createClass({
           <h1>Search for spells</h1>
         </header>
         <div className="container">
-          <SearchForm onSchoolChange={this.onSchoolChange}/>
-          <SpellsContainer school={this.state.school} />
+          <SearchForm onSchoolChange={this.onSchoolChange}
+                      onHigherLevelChange={this.onHigherLevelChange}
+                      onRitualChange={this.onRitualChange}
+                      />
+          <SpellsContainer school={this.state.school}
+                           higherLevels={this.state.higherLevels}
+                           ritual={this.state.ritual}
+                           />
         </div>
-        <footer>Work in progress...</footer>
+        <footer>Work in progress... on Github: https://github.com/amandine-perichon/spell-search</footer>
       </div>
     )
   }
