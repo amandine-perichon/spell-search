@@ -24,24 +24,111 @@ header, footer {
 /* SPELL LIST STYLE */
 
 .spell-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
   margin: 1rem;
 }
 
 .spell {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  padding: 2rem;
-  border: 1px solid grey;
+  background-color: darkred;
+  border: 1px solid black;
+  border-radius: 20px;
+  width: 400px;
+  padding: 20px;
+  margin: 5px;
 }
 
-.spell-name {
-  font-size: 2rem;
+.spell .name {
+  background-color: beige;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: verdana;
   font-weight: bold;
-  text-decoration: underline;
+  font-size: 2rem;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
-.spell-type {
-  font-size: 2rem;
+.spell .type {
+  text-align: center;
+  color: beige;
+}
+
+.spell .stats {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.spell .stats .stat-block {
+  background-color: beige;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.spell .stats .stat-block.top.left {
+  border-bottom: 2px solid darkred;
+  border-right: 2px solid darkred;
+}
+
+.spell .stats .stat-block.top.right {
+  border-bottom: 2px solid darkred;
+  border-left: 2px solid darkred;
+}
+
+.spell .stats .stat-block.bottom.left {
+  border-top: 2px solid darkred;
+  border-right: 2px solid darkred;
+}
+
+.spell .stats .stat-block.bottom.right {
+  border-top: 2px solid darkred;
+  border-left: 2px solid darkred;
+}
+
+.spell .stats .stat-block .title {
+  text-transform: uppercase;
+  color: darkred;
+  text-align: center;
+  font-weight: bold;
+}
+
+.spell .stats .stat-block .content {
+  text-align: center;
+}
+
+.spell .description {
+  line-height: 110%;
+  padding: 15px;
+  background-color: beige;
+  margin-top: 20px;
+  text-align: justify;
+}
+
+.spell .description .material {
+  margin-bottom: 1rem;
+}
+
+.spell .higher-levels-title {
+  text-align: center;
+  color: beige;
+}
+
+.spell .higher-levels {
+  line-height: 110%;
+  padding: 15px;
+  background-color: beige;
+  text-align: justify;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.spell .classes {
+  margin-top: 1rem;
+  color: beige;
+  font-size: 14px;
+  text-transform: capitalize;
   font-weight: bold;
 }
 

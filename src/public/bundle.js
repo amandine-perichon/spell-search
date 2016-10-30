@@ -42728,7 +42728,7 @@
 	  value: true
 	});
 	
-	var _templateObject = _taggedTemplateLiteral(['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String, $castingTime: String, $description: String, $componentType: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range, casting_time: $castingTime, description: $description, component_type: $componentType) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}'], ['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String, $castingTime: String, $description: String, $componentType: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range, casting_time: $castingTime, description: $description, component_type: $componentType) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}']);
+	var _templateObject = _taggedTemplateLiteral(['query SpellSearch (\n  $school: School,\n  $higherLevels: Boolean,\n  $ritual: Boolean,\n  $spellClass: Class,\n  $name: String,\n  $level: String,\n  $duration: String,\n  $concentration: Boolean,\n  $range: String,\n  $castingTime: String,\n  $description: String,\n  $componentType: String) {\n  spells (\n    school: $school,\n    class: $spellClass,\n    higher_levels: $higherLevels,\n    ritual: $ritual,\n    name: $name,\n    level: $level,\n    duration: $duration,\n    concentration: $concentration,\n    range: $range,\n    casting_time: $castingTime,\n    description: $description,\n    component_type: $componentType) {\n    _id\n    name\n    level\n    school\n    casting_time\n    range\n    duration\n    description\n    ritual\n    higher_levels\n    classes\n    components {\n      material\n      somatic\n      verbal\n      materials_needed\n    }\n  }\n}'], ['query SpellSearch (\n  $school: School,\n  $higherLevels: Boolean,\n  $ritual: Boolean,\n  $spellClass: Class,\n  $name: String,\n  $level: String,\n  $duration: String,\n  $concentration: Boolean,\n  $range: String,\n  $castingTime: String,\n  $description: String,\n  $componentType: String) {\n  spells (\n    school: $school,\n    class: $spellClass,\n    higher_levels: $higherLevels,\n    ritual: $ritual,\n    name: $name,\n    level: $level,\n    duration: $duration,\n    concentration: $concentration,\n    range: $range,\n    casting_time: $castingTime,\n    description: $description,\n    component_type: $componentType) {\n    _id\n    name\n    level\n    school\n    casting_time\n    range\n    duration\n    description\n    ritual\n    higher_levels\n    classes\n    components {\n      material\n      somatic\n      verbal\n      materials_needed\n    }\n  }\n}']);
 	
 	var _reactApollo = __webpack_require__(238);
 	
@@ -47333,20 +47333,20 @@
 	    }) : null;
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'spell-list' },
+	      null,
 	      loading ? _react2.default.createElement('div', { className: 'loader' }) : _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(
+	        spells ? _react2.default.createElement(
 	          'div',
 	          null,
 	          'Your search returned ',
 	          spells.length,
 	          ' results'
-	        ),
+	        ) : null,
 	        _react2.default.createElement(
 	          'div',
-	          null,
+	          { className: 'spell-list' },
 	          spellList
 	        )
 	      )
@@ -47378,131 +47378,129 @@
 	  },
 	  render: function render() {
 	    var spell = this.props.spell;
+	    var componentsArr = [];
+	    if (spell.components) {
+	      if (spell.components.verbal) {
+	        componentsArr.push("V");
+	      }
+	      if (spell.components.somatic) {
+	        componentsArr.push("S");
+	      }
+	      if (spell.components.material) {
+	        componentsArr.push("M");
+	      }
+	      var componentDescription = componentsArr.join(", ");
+	    }
 	    return _react2.default.createElement(
 	      "div",
-	      { className: "row spell" },
+	      { className: "spell" },
 	      _react2.default.createElement(
 	        "div",
-	        { className: "spell-heading" },
-	        _react2.default.createElement(
-	          "div",
-	          { className: "spell-name" },
-	          spell.name
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "spell-type" },
-	          "level ",
-	          spell.level,
-	          " - ",
-	          spell.school
-	        )
+	        { className: "name" },
+	        spell.name
 	      ),
 	      _react2.default.createElement(
 	        "div",
-	        { className: "row spell-stats" },
+	        { className: "type" },
+	        "level ",
+	        spell.level,
+	        " - ",
+	        spell.school,
+	        " ",
+	        spell.ritual ? "(ritual)" : null
+	      ),
+	      _react2.default.createElement(
+	        "div",
+	        { className: "stats" },
 	        _react2.default.createElement(
 	          "div",
-	          { className: "one-third column" },
+	          { className: "stat-block top left" },
 	          _react2.default.createElement(
 	            "div",
-	            null,
-	            "Casting time: ",
+	            { className: "title" },
+	            "casting time"
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "content" },
 	            spell.casting_time
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "stat-block top right" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "title" },
+	            "range"
 	          ),
 	          _react2.default.createElement(
 	            "div",
-	            null,
-	            "Range: ",
+	            { className: "content" },
 	            spell.range
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "stat-block bottom left" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "title" },
+	            "components"
 	          ),
 	          _react2.default.createElement(
 	            "div",
-	            null,
-	            "Duration: ",
+	            { className: "content" },
+	            spell.components ? componentDescription : "-"
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "stat-block bottom right" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "title" },
+	            "duration"
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "content" },
 	            spell.duration
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            null,
-	            spell.ritual ? "Ritual: " + spell.ritual : null
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "one-third column" },
-	          _react2.default.createElement(
-	            "div",
-	            null,
-	            "Classes: ",
-	            spell.classes.map(function (elem) {
-	              return _react2.default.createElement(
-	                "span",
-	                { key: elem },
-	                elem,
-	                " "
-	              );
-	            })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "one-third column" },
-	          _react2.default.createElement(
-	            "div",
-	            null,
-	            "Components:",
-	            _react2.default.createElement(
-	              "div",
-	              null,
-	              "V: ",
-	              spell.components && spell.components.verbal ? "Yes" : "No"
-	            ),
-	            _react2.default.createElement(
-	              "div",
-	              null,
-	              "S: ",
-	              spell.components && spell.components.somatic ? "Yes" : "No"
-	            ),
-	            _react2.default.createElement(
-	              "div",
-	              null,
-	              "M: ",
-	              spell.components && spell.components.material ? "Yes" : "No"
-	            ),
-	            spell.components && spell.components.material ? _react2.default.createElement(
-	              "div",
-	              null,
-	              "materials: " + spell.components.materials_needed
-	            ) : null
 	          )
 	        )
 	      ),
 	      _react2.default.createElement(
 	        "div",
-	        { className: "row spell-description" },
-	        _react2.default.createElement(
+	        { className: "description" },
+	        spell.components && spell.components.material ? _react2.default.createElement(
 	          "div",
-	          null,
-	          _react2.default.createElement(
-	            "strong",
-	            null,
-	            "Description"
-	          ),
-	          ": ",
-	          spell.description
-	        ),
-	        spell.higher_levels ? _react2.default.createElement(
-	          "div",
-	          null,
-	          _react2.default.createElement(
-	            "strong",
-	            null,
-	            "Higher Levels"
-	          ),
-	          ": ",
-	          spell.higher_levels
-	        ) : null
+	          { className: "material" },
+	          "Materials: ",
+	          spell.components.materials_needed
+	        ) : null,
+	        spell.description
+	      ),
+	      spell.higher_levels ? _react2.default.createElement(
+	        "div",
+	        { className: "higher-levels-title" },
+	        "At Higher Levels"
+	      ) : null,
+	      spell.higher_levels ? _react2.default.createElement(
+	        "div",
+	        { className: "higher-levels" },
+	        spell.higher_levels
+	      ) : null,
+	      _react2.default.createElement(
+	        "div",
+	        { className: "classes" },
+	        spell.classes.map(function (elem) {
+	          return _react2.default.createElement(
+	            "span",
+	            { key: elem },
+	            elem,
+	            " "
+	          );
+	        })
 	      )
 	    );
 	  }

@@ -6,36 +6,42 @@ export default React.createClass({
   },
   render () {
     const spell = this.props.spell
+    let componentsArr = []
+    if (spell.components) {
+      if (spell.components.verbal) { componentsArr.push("V")}
+      if (spell.components.somatic) { componentsArr.push("S")}
+      if (spell.components.material) { componentsArr.push("M")}
+      var componentDescription = componentsArr.join(", ")
+    }
     return (
-      <div className="row spell">
-        <div className="spell-heading">
-          <div className="spell-name">{spell.name}</div>
-          <div className="spell-type">level {spell.level} - {spell.school}</div>
-        </div>
-        <div className="row spell-stats">
-          <div className="one-third column">
-            <div>Casting time: {spell.casting_time}</div>
-            <div>Range: {spell.range}</div>
-            <div>Duration: {spell.duration}</div>
-            <div>{spell.ritual? `Ritual: ${spell.ritual}`: null}</div>
+      <div className="spell">
+        <div className="name">{spell.name}</div>
+        <div className="type">level {spell.level} - {spell.school} {spell.ritual? "(ritual)": null}</div>
+        <div className="stats">
+          <div className="stat-block top left">
+            <div className="title">casting time</div>
+            <div className="content">{spell.casting_time}</div>
           </div>
-          <div className="one-third column">
-            <div>Classes: {spell.classes.map((elem) => <span key={elem}>{elem} </span>)}</div>
+          <div className="stat-block top right">
+            <div className="title">range</div>
+            <div className="content">{spell.range}</div>
           </div>
-          <div className="one-third column">
-            <div>Components:
-              <div>V: {spell.components && spell.components.verbal? "Yes": "No"}</div>
-              <div>S: {spell.components && spell.components.somatic? "Yes": "No"}</div>
-              <div>M: {spell.components && spell.components.material? "Yes": "No"}</div>
-              {spell.components && spell.components.material?
-                <div>{`materials: ${spell.components.materials_needed}`}</div>: null}
-            </div>
+          <div className="stat-block bottom left">
+            <div className="title">components</div>
+            <div className="content">{spell.components? componentDescription : "-"}</div>
+          </div>
+          <div className="stat-block bottom right">
+            <div className="title">duration</div>
+            <div className="content">{spell.duration}</div>
           </div>
         </div>
-        <div className="row spell-description">
-          <div><strong>Description</strong>: {spell.description}</div>
-          {spell.higher_levels? <div><strong>Higher Levels</strong>: {spell.higher_levels}</div>: null}
+        <div className="description">
+          {spell.components && spell.components.material? <div className="material">Materials: {spell.components.materials_needed}</div>: null}
+          {spell.description}
         </div>
+        {spell.higher_levels? <div className="higher-levels-title">At Higher Levels</div>: null}
+        {spell.higher_levels? <div className="higher-levels">{spell.higher_levels}</div>: null}
+        <div className="classes">{spell.classes.map((elem) => <span key={elem}>{elem} </span>)}</div>
       </div>
     )
   }
