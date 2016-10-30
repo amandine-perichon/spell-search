@@ -42590,6 +42590,7 @@
 	  getInitialState: function getInitialState() {
 	    return {
 	      school: null,
+	      level: null,
 	      higherLevels: null,
 	      ritual: null,
 	      spellClass: null,
@@ -42639,6 +42640,7 @@
 	    // TO DO RESET FORM
 	    this.setState({
 	      school: null,
+	      level: null,
 	      higherLevels: null,
 	      ritual: null,
 	      spellClass: null,
@@ -47572,7 +47574,7 @@
 	          { className: "level-filter" },
 	          _react2.default.createElement(
 	            "select",
-	            { onChange: function onChange(evt) {
+	            { defaultValue: "all", onChange: function onChange(evt) {
 	                return _this.props.onLevelChange(evt.target.value);
 	              } },
 	            _react2.default.createElement(
@@ -47637,7 +47639,7 @@
 	          { className: "school-filter" },
 	          _react2.default.createElement(
 	            "select",
-	            { onChange: function onChange(evt) {
+	            { defaultValue: "all", onChange: function onChange(evt) {
 	                return _this.props.onSchoolChange(evt.target.value);
 	              } },
 	            _react2.default.createElement(
@@ -47692,7 +47694,7 @@
 	          { className: "class-filter" },
 	          _react2.default.createElement(
 	            "select",
-	            { onChange: function onChange(evt) {
+	            { defaultValue: "all", onChange: function onChange(evt) {
 	                return _this.props.onClassChange(evt.target.value);
 	              } },
 	            _react2.default.createElement(
@@ -47747,7 +47749,7 @@
 	          { className: "duration-filter" },
 	          _react2.default.createElement(
 	            "select",
-	            { onChange: function onChange(evt) {
+	            { defaultValue: "all", onChange: function onChange(evt) {
 	                return _this.props.onDurationChange(evt.target.value);
 	              } },
 	            _react2.default.createElement(
@@ -47787,7 +47789,7 @@
 	          { className: "range-filter" },
 	          _react2.default.createElement(
 	            "select",
-	            { onChange: function onChange(evt) {
+	            { defaultValue: "all", onChange: function onChange(evt) {
 	                return _this.props.onRangeChange(evt.target.value);
 	              } },
 	            _react2.default.createElement(
@@ -47852,7 +47854,7 @@
 	          { className: "casting-time-filter" },
 	          _react2.default.createElement(
 	            "select",
-	            { onChange: function onChange(evt) {
+	            { defaultValue: "all", onChange: function onChange(evt) {
 	                return _this.props.onCastingChange(evt.target.value);
 	              } },
 	            _react2.default.createElement(

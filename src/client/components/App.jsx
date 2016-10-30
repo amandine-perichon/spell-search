@@ -7,6 +7,7 @@ export default React.createClass({
   getInitialState () {
     return {
       school: null,
+      level: null,
       higherLevels: null,
       ritual: null,
       spellClass: null,
@@ -56,6 +57,7 @@ export default React.createClass({
     // TO DO RESET FORM
     this.setState({
       school: null,
+      level: null,
       higherLevels: null,
       ritual: null,
       spellClass: null,

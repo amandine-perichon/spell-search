@@ -15,7 +15,7 @@ export default React.createClass({
     onDescriptionChange: React.PropTypes.func.isRequired
   },
   render () {
-  return (
+    return (
     <div className="search-form">
       <div className="free-text-filters">
         <div className="name-filter">
@@ -33,7 +33,7 @@ export default React.createClass({
       </div>
       <div className="drop-down-filters">
         <div className="level-filter">
-          <select onChange={evt => this.props.onLevelChange(evt.target.value)}>
+          <select defaultValue="all" onChange={evt => this.props.onLevelChange(evt.target.value)}>
             <option value="all">All levels</option>
             <option value="cantrip">Cantrip</option>
             <option value="1">level 1</option>
@@ -48,7 +48,7 @@ export default React.createClass({
           </select>
         </div>
         <div className="school-filter">
-          <select onChange={evt => this.props.onSchoolChange(evt.target.value)}>
+          <select defaultValue="all" onChange={evt => this.props.onSchoolChange(evt.target.value)}>
             <option value="all">All schools</option>
             <option value="abjuration">Abjuration</option>
             <option value="conjuration">Conjuration</option>
@@ -61,7 +61,7 @@ export default React.createClass({
           </select>
         </div>
         <div className="class-filter">
-          <select onChange={evt => this.props.onClassChange(evt.target.value)}>
+          <select defaultValue="all" onChange={evt => this.props.onClassChange(evt.target.value)}>
             <option value="all">All classes</option>
             <option value="bard">Bard</option>
             <option value="cleric">Cleric</option>
@@ -74,7 +74,7 @@ export default React.createClass({
           </select>
         </div>
         <div className="duration-filter">
-          <select onChange={evt => this.props.onDurationChange(evt.target.value)}>
+          <select defaultValue="all" onChange={evt => this.props.onDurationChange(evt.target.value)}>
             <option value="all">All durations</option>
             <option value="instantaneous">Instantaneous</option>
             <option value="hour">Hours</option>
@@ -84,7 +84,7 @@ export default React.createClass({
           </select>
         </div>
         <div className="range-filter">
-          <select onChange={evt => this.props.onRangeChange(evt.target.value)}>
+          <select defaultValue="all" onChange={evt => this.props.onRangeChange(evt.target.value)}>
             <option value="all">All ranges</option>
             <option value="touch">Touch</option>
             <option value="self">Self</option>
@@ -99,7 +99,7 @@ export default React.createClass({
           </select>
         </div>
         <div className="casting-time-filter">
-          <select onChange={evt => this.props.onCastingChange(evt.target.value)}>
+          <select defaultValue="all" onChange={evt => this.props.onCastingChange(evt.target.value)}>
             <option value="all">All casting times</option>
             <option value="bonus">Bonus</option>
             <option value="reaction">Reaction</option>

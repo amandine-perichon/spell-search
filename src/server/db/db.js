@@ -18,14 +18,16 @@ function connect () {
 }
 
 function listAllSpells () {
-  return spellCollection.find()
+  const options = {sort: "name"}
+  return spellCollection.find({}, options)
 }
 
 function findSpells (params) {
   console.log("before transformation", params)
-  let query = buildFindSpellsQuery(params)
+  const query = buildFindSpellsQuery(params)
+  const options = {sort: "name"}
   console.log("after transformation", query)
-  return spellCollection.find(query)
+  return spellCollection.find(query, options)
 }
 
 function buildFindSpellsQuery (params) {
