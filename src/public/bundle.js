@@ -42600,7 +42600,8 @@
 	      concentration: null,
 	      range: null,
 	      castingTime: null,
-	      description: null
+	      description: null,
+	      componentType: null
 	    };
 	  },
 	  onSchoolChange: function onSchoolChange(school) {
@@ -42636,6 +42637,9 @@
 	  onDescriptionChange: function onDescriptionChange(description) {
 	    this.setState({ description: description !== "" ? description : null });
 	  },
+	  onComponentChange: function onComponentChange(componentType) {
+	    this.setState({ componentType: componentType !== "all" ? componentType : null });
+	  },
 	  resetSearch: function resetSearch() {
 	    // TO DO RESET FORM
 	    this.setState({
@@ -42650,7 +42654,8 @@
 	      concentration: null,
 	      range: null,
 	      castingTime: null,
-	      description: null
+	      description: null,
+	      componentType: null
 	    });
 	  },
 	  render: function render() {
@@ -42679,7 +42684,8 @@
 	          onConcentrationChange: this.onConcentrationChange,
 	          onRangeChange: this.onRangeChange,
 	          onCastingChange: this.onCastingChange,
-	          onDescriptionChange: this.onDescriptionChange
+	          onDescriptionChange: this.onDescriptionChange,
+	          onComponentChange: this.onComponentChange
 	        }),
 	        _react2.default.createElement(
 	          'button',
@@ -42696,7 +42702,8 @@
 	          concentration: this.state.concentration,
 	          range: this.state.range,
 	          castingTime: this.state.castingTime,
-	          description: this.state.description
+	          description: this.state.description,
+	          componentType: this.state.componentType
 	        })
 	      ),
 	      _react2.default.createElement(
@@ -42718,7 +42725,7 @@
 	  value: true
 	});
 	
-	var _templateObject = _taggedTemplateLiteral(['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String, $castingTime: String, $description: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range, casting_time: $castingTime, description: $description) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}'], ['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String, $castingTime: String, $description: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range, casting_time: $castingTime, description: $description) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}']);
+	var _templateObject = _taggedTemplateLiteral(['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String, $castingTime: String, $description: String, $componentType: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range, casting_time: $castingTime, description: $description, component_type: $componentType) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}'], ['query SpellSearch ($school: School, $higherLevels: Boolean, $ritual: Boolean, $spellClass: Class $name: String, $level: String, $duration: String, $concentration: Boolean, $range: String, $castingTime: String, $description: String, $componentType: String) {\n  spells (school: $school, class: $spellClass, higher_levels: $higherLevels, ritual: $ritual, name: $name, level: $level, duration: $duration, concentration: $concentration, range: $range, casting_time: $castingTime, description: $description, component_type: $componentType) {\n  _id\n  name\n  level\n  school\n  casting_time\n  range\n  duration\n  description\n  ritual\n  higher_levels\n  classes\n  components {\n    material\n    somatic\n    verbal\n    materials_needed\n  \t}\n\t}\n}']);
 	
 	var _reactApollo = __webpack_require__(238);
 	
@@ -42748,7 +42755,8 @@
 	        concentration = _ref.concentration,
 	        range = _ref.range,
 	        castingTime = _ref.castingTime,
-	        description = _ref.description;
+	        description = _ref.description,
+	        componentType = _ref.componentType;
 	
 	    return { variables: {
 	        school: school,
@@ -42761,7 +42769,8 @@
 	        concentration: concentration,
 	        range: range,
 	        castingTime: castingTime,
-	        description: description
+	        description: description,
+	        componentType: componentType
 	      }
 	    };
 	  }
@@ -47526,7 +47535,8 @@
 	    onConcentrationChange: _react2.default.PropTypes.func.isRequired,
 	    onRangeChange: _react2.default.PropTypes.func.isRequired,
 	    onCastingChange: _react2.default.PropTypes.func.isRequired,
-	    onDescriptionChange: _react2.default.PropTypes.func.isRequired
+	    onDescriptionChange: _react2.default.PropTypes.func.isRequired,
+	    onComponentChange: _react2.default.PropTypes.func.isRequired
 	  },
 	  render: function render() {
 	    var _this = this;
@@ -47881,6 +47891,36 @@
 	              "option",
 	              { value: "minute" },
 	              "Minutes"
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "component-filter" },
+	          _react2.default.createElement(
+	            "select",
+	            { defaultValue: "all", onChange: function onChange(evt) {
+	                return _this.props.onComponentChange(evt.target.value);
+	              } },
+	            _react2.default.createElement(
+	              "option",
+	              { value: "all" },
+	              "All components"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "verbal" },
+	              "Exclude verbal"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "somatic" },
+	              "Exclude somatic"
+	            ),
+	            _react2.default.createElement(
+	              "option",
+	              { value: "material" },
+	              "Exclude material"
 	            )
 	          )
 	        )

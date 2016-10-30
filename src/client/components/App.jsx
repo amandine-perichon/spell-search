@@ -17,7 +17,8 @@ export default React.createClass({
       concentration: null,
       range: null,
       castingTime: null,
-      description: null
+      description: null,
+      componentType: null
     }
   },
   onSchoolChange (school) {
@@ -53,6 +54,9 @@ export default React.createClass({
   onDescriptionChange (description) {
     this.setState({description: description!=="" ? description : null})
   },
+  onComponentChange (componentType) {
+    this.setState({componentType: componentType!=="all" ? componentType : null})
+  },
   resetSearch () {
     // TO DO RESET FORM
     this.setState({
@@ -67,7 +71,8 @@ export default React.createClass({
       concentration: null,
       range: null,
       castingTime: null,
-      description: null
+      description: null,
+      componentType: null
     })
   },
   render () {
@@ -88,6 +93,7 @@ export default React.createClass({
                       onRangeChange={this.onRangeChange}
                       onCastingChange={this.onCastingChange}
                       onDescriptionChange={this.onDescriptionChange}
+                      onComponentChange={this.onComponentChange}
                       />
           <button type="button" onClick={this.resetSearch}>Reset search filter</button>
           <SpellsContainer school={this.state.school}
@@ -101,6 +107,7 @@ export default React.createClass({
                            range={this.state.range}
                            castingTime={this.state.castingTime}
                            description={this.state.description}
+                           componentType={this.state.componentType}
                            />
         </div>
         <footer>Work in progress... on Github: https://github.com/amandine-perichon/spell-search</footer>

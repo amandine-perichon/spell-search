@@ -59,7 +59,7 @@ function buildFindSpellsQueryParam (param, value) {
     case "description":
       return {description: {$regex: value, $options: "$i"}}
     case "component_type":
-      return {[`components.${value}`]: true}
+      return {[`components.${value}`]: false}
     case "duration":
       return {duration: {$regex: value, $options: "$i"}}
     case "concentration":

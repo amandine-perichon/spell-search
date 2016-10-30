@@ -12,7 +12,8 @@ export default React.createClass({
     onConcentrationChange: React.PropTypes.func.isRequired,
     onRangeChange: React.PropTypes.func.isRequired,
     onCastingChange: React.PropTypes.func.isRequired,
-    onDescriptionChange: React.PropTypes.func.isRequired
+    onDescriptionChange: React.PropTypes.func.isRequired,
+    onComponentChange: React.PropTypes.func.isRequired
   },
   render () {
     return (
@@ -105,6 +106,14 @@ export default React.createClass({
             <option value="reaction">Reaction</option>
             <option value="action">Action</option>
             <option value="minute">Minutes</option>
+          </select>
+        </div>
+        <div className="component-filter">
+          <select defaultValue="all" onChange={evt => this.props.onComponentChange(evt.target.value)}>
+            <option value="all">All components</option>
+            <option value="verbal">Exclude verbal</option>
+            <option value="somatic">Exclude somatic</option>
+            <option value="material">Exclude material</option>
           </select>
         </div>
       </div>

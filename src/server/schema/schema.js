@@ -42,7 +42,7 @@ const Class = new GraphQLEnumType({
 
 const Components = new GraphQLObjectType({
   name: 'Components',
-  description: 'Represent the component types and materials in a spell',
+  description: 'Represents the component types (material, somatic, verbal) and materials in a spell',
   fields: () => ({
     material: {type: GraphQLBoolean},
     somatic: {type: GraphQLBoolean},
@@ -50,7 +50,8 @@ const Components = new GraphQLObjectType({
     materials_needed: {type: new GraphQLList(GraphQLString)}
   })
 })
-//
+
+// REPLACE WITH NonNull after data clean up
 // const Spell = new GraphQLObjectType({
 //   name: 'Spell',
 //   description: 'Represent a spell',
@@ -72,7 +73,7 @@ const Components = new GraphQLObjectType({
 
 const Spell = new GraphQLObjectType({
   name: 'Spell',
-  description: 'Represent a spell',
+  description: 'Represents a Dungeons and Dragons 5th edition spell',
   fields: () => ({
     _id: {type: GraphQLString},
     name: {type: GraphQLString},
@@ -89,7 +90,7 @@ const Spell = new GraphQLObjectType({
   })
 })
 
-// to do: Add area of effect YES NO
+// TO DO: Add area of effect boolean to args
 
 const Query = new GraphQLObjectType({
   name: "RootQuery",
@@ -98,23 +99,23 @@ const Query = new GraphQLObjectType({
       type: new GraphQLList(Spell),
       args: {
         name: {
-          description: 'Name of the spell',
+          description: 'Text search on name field',
           type: GraphQLString
         },
         class: {
-          description: 'Class that can cast the spell',
+          description: 'Search for spells can can be cast by this class',
           type: Class
         },
         school: {
-          description: 'School of magic',
+          description: 'Search for spells from a specific school of magic',
           type: School
         },
         level: {
-          description: 'Level of the spell',
+          description: 'Text search on the level field',
           type: GraphQLString
         },
         higher_levels: {
-          description: 'Indicates whether a description of the spells at higher levels is available',
+          description: 'Search for spells for which a description at higher levels is available',
           type: GraphQLBoolean
         },
         duration: {
@@ -126,11 +127,11 @@ const Query = new GraphQLObjectType({
           type: GraphQLString
         },
         ritual: {
-          description: 'Spell can be cast as ritual',
+          description: 'Search for spells which can be cast as a ritual',
           type: GraphQLBoolean
         },
         concentration: {
-          description: 'Spell requires concentration',
+          description: 'Search for spells which require concentration',
           type: GraphQLBoolean
         },
         casting_time: {
@@ -142,7 +143,7 @@ const Query = new GraphQLObjectType({
           type: GraphQLString
         },
         component_type: {
-          description: "Type of component: verbal, somatic or material",
+          description: "Search for spells which exclude a specific type of component: verbal, somatic or material",
           type: GraphQLString
         }
       },
