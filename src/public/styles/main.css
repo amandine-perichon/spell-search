@@ -49,6 +49,7 @@ header .sub-title {
 .search-count {
   font-weight: bold;
   text-align: center;
+  padding: 1rem;
 }
 
 .drop-down-filters {
