@@ -1,4 +1,5 @@
 import React from 'react'
+import debounce from 'lodash.debounce'
 
 export default React.createClass({
   props: {
@@ -15,6 +16,23 @@ export default React.createClass({
     onDescriptionChange: React.PropTypes.func.isRequired,
     onComponentChange: React.PropTypes.func.isRequired
   },
+  componentWillMount () {
+     this.delayedOnChangeName = debounce((evt) => {
+       this.props.onNameChange(evt.target.value)
+     }, 500)
+
+     this.delayedOnChangeDescription = debounce((evt) => {
+       this.props.onDescriptionChange(evt.target.value)
+     }, 500)
+  },
+  onChangeName(evt) {
+    evt.persist()
+    this.delayedOnChangeName(evt)
+  },
+  onChangeDescription(evt) {
+    evt.persist()
+    this.delayedOnChangeDescription(evt)
+  },
   render () {
     return (
     <div className="search-form">
@@ -23,13 +41,13 @@ export default React.createClass({
           <label htmlFor="name">Name </label>
           <input type="text"
                  name="name"
-                 onChange={evt => this.props.onNameChange(evt.target.value)} />
+                 onChange={this.onChangeName} />
         </div>
         <div className="description-filter">
           <label htmlFor="description">Description </label>
           <input type="text"
                  name="description"
-                 onChange={evt => this.props.onDescriptionChange(evt.target.value)} />
+                 onChange={this.onChangeDescription} />
         </div>
       </div>
       <div className="drop-down-filters">

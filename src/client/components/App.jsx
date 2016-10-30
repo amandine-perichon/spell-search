@@ -18,7 +18,8 @@ export default React.createClass({
       range: null,
       castingTime: null,
       description: null,
-      componentType: null
+      componentType: null,
+      lastFormReset: new Date()
     }
   },
   onSchoolChange (school) {
@@ -72,7 +73,8 @@ export default React.createClass({
       range: null,
       castingTime: null,
       description: null,
-      componentType: null
+      componentType: null,
+      lastFormReset: new Date()
     })
   },
   render () {
@@ -82,7 +84,8 @@ export default React.createClass({
           <h1>Search for spells</h1>
         </header>
         <div className="container">
-          <SearchForm onSchoolChange={this.onSchoolChange}
+          <SearchForm key={this.state.lastFormReset}
+                      onSchoolChange={this.onSchoolChange}
                       onHigherLevelChange={this.onHigherLevelChange}
                       onRitualChange={this.onRitualChange}
                       onClassChange={this.onClassChange}
