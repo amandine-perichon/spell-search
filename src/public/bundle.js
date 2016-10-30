@@ -42636,6 +42636,7 @@
 	    this.setState({ description: description !== "" ? description : null });
 	  },
 	  resetSearch: function resetSearch() {
+	    // TO DO RESET FORM
 	    this.setState({
 	      school: null,
 	      higherLevels: null,

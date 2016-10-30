@@ -53,6 +53,7 @@ export default React.createClass({
     this.setState({description: description!=="" ? description : null})
   },
   resetSearch () {
+    // TO DO RESET FORM
     this.setState({
       school: null,
       higherLevels: null,

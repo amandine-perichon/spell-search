@@ -23,60 +23,58 @@ function listAllSpells () {
 
 function findSpells (params) {
   console.log("before transformation", params)
-  let query = Object.assign({}, params)
-  if (params.class) {
-    query = Object.assign({}, query, {classes: { "$in" : [params.class]}})
-    delete query.class
-  }
-  if (params.name) {
-    query = Object.assign({}, query, {name: {$regex: params.name, $options: "$i"}})
-  }
-  if (params.hasOwnProperty('higher_levels')) {
-    if (params.higher_levels) {
-      query = Object.assign({}, query, {higher_levels: {$exists: true}})
-    } else {
-      delete query.higher_levels
-    }
-  }
-  if (params.hasOwnProperty('instantaneous')) {
-    if (params.instantaneous) {
-      query = Object.assign({}, query, {duration: "Instantaneous"})
-      delete query.instantaneous
-    } else {
-      query = Object.assign({}, query, {duration: {$ne: "Instantaneous"}})
-      delete query.instantaneous
-    }
-  }
-  if (params.hasOwnProperty('range')) {
-    query = Object.assign({}, query, {range: {$regex: params.range, $options: "$i"}})
-  }
-  if (params.hasOwnProperty('duration')) {
-    query = Object.assign({}, query, {duration: {$regex: params.duration, $options: "$i"}})
-  }
-  if (params.hasOwnProperty('concentration')) {
-    query = Object.assign({}, query, {duration: {$regex: "concentration", $options: "$i"}})
-    delete query.concentration
-  }
-  if (params.hasOwnProperty('concentration') && params.hasOwnProperty('duration')) {
-    query = Object.assign({}, query, {duration: {$regex: `Concentration.*${params.duration}|${params.duration}.*Concentration`, $options: "$i"}})
-    delete query.concentration
-  }
-  if (params.hasOwnProperty('casting_time')) {
-    query = Object.assign({}, query, {casting_time: {$regex: params.casting_time, $options: "$i"}})
-  }
-  if (params.hasOwnProperty('description')) {
-    query = Object.assign({}, query, {description: {$regex: params.description, $options: "$i"}})
-  }
-  if (params.component_type) {
-    const queryParams = {}
-    queryParams[`components.${params.component_type}`] = true
-    query = Object.assign({}, query, queryParams)
-    delete query.component_type
-  }
+  let query = buildFindSpellsQuery(params)
   console.log("after transformation", query)
   return spellCollection.find(query)
 }
 
+function buildFindSpellsQuery (params) {
+  let query = {}
+  Object.keys(params).forEach(param => {
+    Object.assign(query, buildFindSpellsQueryParam(param, params[param]))
+  })
+  if (params.hasOwnProperty('concentration') && params.hasOwnProperty('duration')) {
+    query = Object.assign(query, {
+      duration: {
+        $regex: `Concentration.*${params.duration}|${params.duration}.*Concentration`, $options: "$i"
+      }
+    })
+  }
+  return query
+}
+
+function buildFindSpellsQueryParam (param, value) {
+  switch (param) {
+    case "class":
+      return {classes: { "$in" : [value]}}
+    case "name":
+      return {name: {$regex: value, $options: "$i"}}
+    case "higher_levels":
+      if (value) {
+        return {higher_levels: {$exists: true}}
+      } else {
+        return {}
+      }
+    case "range":
+      return {range: {$regex: value, $options: "$i"}}
+    case "casting_time":
+      return {casting_time: {$regex: value, $options: "$i"}}
+    case "description":
+      return {description: {$regex: value, $options: "$i"}}
+    case "component_type":
+      return {[`components.${value}`]: true}
+    case "duration":
+      return {duration: {$regex: value, $options: "$i"}}
+    case "concentration":
+      if (value) {
+        return {duration: {$regex: "concentration", $options: "$i"}}
+      } else {
+        return {}
+      }
+    default:
+      return {[param]: value}
+  }
+}
 
 module.exports = {
   connect: connect,
