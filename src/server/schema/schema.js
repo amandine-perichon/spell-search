@@ -147,10 +147,7 @@ const Query = new GraphQLObjectType({
         }
       },
       resolve: function(root, params) {
-        if (Object.keys(params).length) {
-          return db.findSpells(params).toArray()
-        }
-        return db.listAllSpells().toArray()
+        return db.findSpells(params).toArray()
       }
     }
   }

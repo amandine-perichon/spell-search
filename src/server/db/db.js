@@ -17,11 +17,6 @@ function connect () {
   })
 }
 
-function listAllSpells () {
-  const options = {sort: "name"}
-  return spellCollection.find({}, options)
-}
-
 function findSpells (params) {
   console.log("before transformation", params)
   const query = buildFindSpellsQuery(params)
@@ -80,6 +75,5 @@ function buildFindSpellsQueryParam (param, value) {
 
 module.exports = {
   connect: connect,
-  listAllSpells: listAllSpells,
   findSpells: findSpells
 }
