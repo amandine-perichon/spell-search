@@ -79,12 +79,12 @@ export default React.createClass({
   },
   render () {
     return (
-      <div>
+      <div className="app">
         <header>
           <h1>Search for spells</h1>
         </header>
         <div className="container">
-          <SearchForm key={this.state.lastFormReset}
+            <SearchForm key={this.state.lastFormReset}
                       onSchoolChange={this.onSchoolChange}
                       onHigherLevelChange={this.onHigherLevelChange}
                       onRitualChange={this.onRitualChange}
@@ -97,8 +97,8 @@ export default React.createClass({
                       onCastingChange={this.onCastingChange}
                       onDescriptionChange={this.onDescriptionChange}
                       onComponentChange={this.onComponentChange}
+                      resetSearch={this.resetSearch}
                       />
-          <button type="button" onClick={this.resetSearch}>Reset search filter</button>
           <SpellsContainer school={this.state.school}
                            spellClass={this.state.spellClass}
                            higherLevels={this.state.higherLevels}

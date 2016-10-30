@@ -14,7 +14,8 @@ export default React.createClass({
     onRangeChange: React.PropTypes.func.isRequired,
     onCastingChange: React.PropTypes.func.isRequired,
     onDescriptionChange: React.PropTypes.func.isRequired,
-    onComponentChange: React.PropTypes.func.isRequired
+    onComponentChange: React.PropTypes.func.isRequired,
+    resetSearch: React.PropTypes.func.isRequired
   },
   componentWillMount () {
      this.delayedOnChangeName = debounce((evt) => {
@@ -37,18 +38,16 @@ export default React.createClass({
     return (
     <div className="search-form">
       <div className="free-text-filters">
-        <div className="name-filter">
-          <label htmlFor="name">Name </label>
-          <input type="text"
-                 name="name"
-                 onChange={this.onChangeName} />
-        </div>
-        <div className="description-filter">
-          <label htmlFor="description">Description </label>
-          <input type="text"
-                 name="description"
-                 onChange={this.onChangeDescription} />
-        </div>
+        <input className="name-filter"
+               type="text"
+               placeholder="Search on spell name"
+               name="name"
+               onChange={this.onChangeName} />
+        <input className="description-filter"
+               type="text"
+               name="description"
+               placeholder="Search in spell description"
+               onChange={this.onChangeDescription} />
       </div>
       <div className="drop-down-filters">
         <div className="level-filter">
@@ -153,6 +152,9 @@ export default React.createClass({
                onChange={evt => this.props.onConcentrationChange(evt.target.checked)}/> Concentration only
         </div>
       </div>
+      <button type="reset-button" onClick={this.props.resetSearch}>
+        Reset search filter
+      </button>
     </div>
   )
   }

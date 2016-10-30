@@ -1,26 +1,56 @@
 /* HEADER AND FOOTER STYLE */
 
 header, footer {
-  padding: 2rem;
-  background-color: steelblue;
+  padding-left: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: #3c6084;
+  color: #f3f3f3;
 }
+
+ /*GENERAL LAYOUT STYLE */
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 1rem;
+}
+
+.search-form {
+  width: 30%;
+}
+
+.spells {
+  width: 70%;
+}
+
 
 /* SEACH FORM STYLE */
 
-.search-form {
-  margin: 1rem;
+.search-count {
+  font-weight: bold;
+  text-align: center;
 }
 
-.checkbox-filters div,
-.free-text-filters div,
+.drop-down-filters {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .drop-down-filters div {
-  display: inline;
+  width: 48%;
+  margin-right: 0.5rem;
 }
 
-.free-text-filters div label,
-.free-text-filters div input {
-  display: inline;
+.drop-down-filters div select {
+  width: 100%;
 }
+
+.name-filter, .description-filter {
+  width: 98%;
+}
+
 /* SPELL LIST STYLE */
 
 .spell-list {
@@ -32,16 +62,19 @@ header, footer {
 }
 
 .spell {
-  background-color: darkred;
+  background-color: #3c6084;
   border: 1px solid black;
   border-radius: 20px;
   width: 400px;
   padding: 20px;
   margin: 5px;
+  -webkit-box-shadow: 3px 3px 5px 0px rgba(145,145,145,1);
+  -moz-box-shadow: 3px 3px 5px 0px rgba(145,145,145,1);
+  box-shadow: 3px 3px 5px 0px rgba(145,145,145,1);
 }
 
 .spell .name {
-  background-color: beige;
+  background-color: #f3f3f3;
   text-transform: uppercase;
   text-align: center;
   font-family: verdana;
@@ -53,7 +86,7 @@ header, footer {
 
 .spell .type {
   text-align: center;
-  color: beige;
+  color: #f3f3f3;
 }
 
 .spell .stats {
@@ -62,34 +95,34 @@ header, footer {
 }
 
 .spell .stats .stat-block {
-  background-color: beige;
+  background-color: #f3f3f3;
   width: 50%;
   box-sizing: border-box;
 }
 
 .spell .stats .stat-block.top.left {
-  border-bottom: 2px solid darkred;
-  border-right: 2px solid darkred;
+  border-bottom: 2px solid #3c6084;
+  border-right: 2px solid #3c6084;
 }
 
 .spell .stats .stat-block.top.right {
-  border-bottom: 2px solid darkred;
-  border-left: 2px solid darkred;
+  border-bottom: 2px solid #3c6084;
+  border-left: 2px solid #3c6084;
 }
 
 .spell .stats .stat-block.bottom.left {
-  border-top: 2px solid darkred;
-  border-right: 2px solid darkred;
+  border-top: 2px solid #3c6084;
+  border-right: 2px solid #3c6084;
 }
 
 .spell .stats .stat-block.bottom.right {
-  border-top: 2px solid darkred;
-  border-left: 2px solid darkred;
+  border-top: 2px solid #3c6084;
+  border-left: 2px solid #3c6084;
 }
 
 .spell .stats .stat-block .title {
   text-transform: uppercase;
-  color: darkred;
+  color: #3c6084;
   text-align: center;
   font-weight: bold;
 }
@@ -101,7 +134,7 @@ header, footer {
 .spell .description {
   line-height: 110%;
   padding: 15px;
-  background-color: beige;
+  background-color: #f3f3f3;
   margin-top: 20px;
   text-align: justify;
 }
@@ -117,13 +150,13 @@ header, footer {
 
 .spell .higher-levels-title {
   text-align: center;
-  color: beige;
+  color: #f3f3f3;
 }
 
 .spell .higher-levels {
   line-height: 110%;
   padding: 15px;
-  background-color: beige;
+  background-color: #f3f3f3;
   text-align: justify;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -131,7 +164,7 @@ header, footer {
 
 .spell .classes {
   margin-top: 1rem;
-  color: beige;
+  color: #f3f3f3;
   font-size: 14px;
   text-transform: capitalize;
   font-weight: bold;
@@ -140,12 +173,13 @@ header, footer {
 /* LOADER STYLE */
 
 .loader {
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
+  margin: 3rem auto;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3c6084; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
 }
 
 @keyframes spin {

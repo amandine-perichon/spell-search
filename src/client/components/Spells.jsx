@@ -12,9 +12,9 @@ export default React.createClass({
     const loading = this.props.data.loading
     const spellList= spells? spells.map(elem => <Spell key={elem._id} spell={elem} />): null
     return (
-          <div>
+          <div className="spells">
             {loading ? <div className="loader"></div> :
-            <div>{spells? <div>Your search returned {spells.length} results</div> : null}<div className="spell-list">{spellList}</div></div>}
+            <div>{spells? <div className="search-count">Your search returned {spells.length} results</div> : null}<div className="spell-list">{spellList}</div></div>}
           </div>
     )
   }

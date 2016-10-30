@@ -42663,7 +42663,7 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'app' },
 	      _react2.default.createElement(
 	        'header',
 	        null,
@@ -42688,13 +42688,9 @@
 	          onRangeChange: this.onRangeChange,
 	          onCastingChange: this.onCastingChange,
 	          onDescriptionChange: this.onDescriptionChange,
-	          onComponentChange: this.onComponentChange
+	          onComponentChange: this.onComponentChange,
+	          resetSearch: this.resetSearch
 	        }),
-	        _react2.default.createElement(
-	          'button',
-	          { type: 'button', onClick: this.resetSearch },
-	          'Reset search filter'
-	        ),
 	        _react2.default.createElement(_SpellsContainer2.default, { school: this.state.school,
 	          spellClass: this.state.spellClass,
 	          higherLevels: this.state.higherLevels,
@@ -47333,13 +47329,13 @@
 	    }) : null;
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'spells' },
 	      loading ? _react2.default.createElement('div', { className: 'loader' }) : _react2.default.createElement(
 	        'div',
 	        null,
 	        spells ? _react2.default.createElement(
 	          'div',
-	          null,
+	          { className: 'search-count' },
 	          'Your search returned ',
 	          spells.length,
 	          ' results'
@@ -47541,7 +47537,8 @@
 	    onRangeChange: _react2.default.PropTypes.func.isRequired,
 	    onCastingChange: _react2.default.PropTypes.func.isRequired,
 	    onDescriptionChange: _react2.default.PropTypes.func.isRequired,
-	    onComponentChange: _react2.default.PropTypes.func.isRequired
+	    onComponentChange: _react2.default.PropTypes.func.isRequired,
+	    resetSearch: _react2.default.PropTypes.func.isRequired
 	  },
 	  componentWillMount: function componentWillMount() {
 	    var _this = this;
@@ -47571,30 +47568,16 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'free-text-filters' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'name-filter' },
-	          _react2.default.createElement(
-	            'label',
-	            { htmlFor: 'name' },
-	            'Name '
-	          ),
-	          _react2.default.createElement('input', { type: 'text',
-	            name: 'name',
-	            onChange: this.onChangeName })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'description-filter' },
-	          _react2.default.createElement(
-	            'label',
-	            { htmlFor: 'description' },
-	            'Description '
-	          ),
-	          _react2.default.createElement('input', { type: 'text',
-	            name: 'description',
-	            onChange: this.onChangeDescription })
-	        )
+	        _react2.default.createElement('input', { className: 'name-filter',
+	          type: 'text',
+	          placeholder: 'Search on spell name',
+	          name: 'name',
+	          onChange: this.onChangeName }),
+	        _react2.default.createElement('input', { className: 'description-filter',
+	          type: 'text',
+	          name: 'description',
+	          placeholder: 'Search in spell description',
+	          onChange: this.onChangeDescription })
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -47978,6 +47961,11 @@
 	            } }),
 	          ' Concentration only'
 	        )
+	      ),
+	      _react2.default.createElement(
+	        'button',
+	        { type: 'reset-button', onClick: this.props.resetSearch },
+	        'Reset search filter'
 	      )
 	    );
 	  }
