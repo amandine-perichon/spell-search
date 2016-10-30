@@ -35,7 +35,7 @@ export default React.createClass({
             <div className="content">{spell.duration}</div>
           </div>
         </div>
-        <div className="description">
+        <div className={`description ${!spell.higher_levels? "rounded": ""}`}>
           {spell.components && spell.components.material? <div className="material">Materials: {spell.components.materials_needed}</div>: null}
           {spell.description}
         </div>

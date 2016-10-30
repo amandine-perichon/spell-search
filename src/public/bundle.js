@@ -47471,7 +47471,7 @@
 	      ),
 	      _react2.default.createElement(
 	        "div",
-	        { className: "description" },
+	        { className: "description " + (!spell.higher_levels ? "rounded" : "") },
 	        spell.components && spell.components.material ? _react2.default.createElement(
 	          "div",
 	          { className: "material" },
