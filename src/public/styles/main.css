@@ -10,19 +10,24 @@ header, footer {
 
  /*GENERAL LAYOUT STYLE */
 
-.container {
+.app-container {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   margin: 0;
   padding: 1rem;
+  width: 100%;
 }
 
 .search-form {
-  width: 30%;
+  width: 23%;
+  min-width: 250px;
+  padding-bottom: 2rem;
 }
 
 .spells {
-  width: 70%;
+  padding-right: 2%;
+  width: 75%;
 }
 
 
@@ -58,7 +63,6 @@ header, footer {
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  margin: 1rem;
 }
 
 .spell {

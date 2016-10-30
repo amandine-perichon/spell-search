@@ -83,7 +83,7 @@ export default React.createClass({
         <header>
           <h1>Search for spells</h1>
         </header>
-        <div className="container">
+        <div className="app-container">
             <SearchForm key={this.state.lastFormReset}
                       onSchoolChange={this.onSchoolChange}
                       onHigherLevelChange={this.onHigherLevelChange}

@@ -42675,7 +42675,7 @@
 	      ),
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'container' },
+	        { className: 'app-container' },
 	        _react2.default.createElement(_SearchForm2.default, { key: this.state.lastFormReset,
 	          onSchoolChange: this.onSchoolChange,
 	          onHigherLevelChange: this.onHigherLevelChange,
