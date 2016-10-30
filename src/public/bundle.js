@@ -42668,9 +42668,14 @@
 	        'header',
 	        null,
 	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'Search for spells'
+	          'div',
+	          { className: 'title' },
+	          '5E Spellbook'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'sub-title' },
+	          'Dungeons & Dragons 5th edition spell search'
 	        )
 	      ),
 	      _react2.default.createElement(
@@ -42708,7 +42713,7 @@
 	      _react2.default.createElement(
 	        'footer',
 	        null,
-	        'Work in progress... on Github: https://github.com/amandine-perichon/spell-search'
+	        'Github: https://github.com/amandine-perichon/spell-search'
 	      )
 	    );
 	  }

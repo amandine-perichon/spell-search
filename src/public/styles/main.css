@@ -8,6 +8,19 @@ header, footer {
   color: #f3f3f3;
 }
 
+header .title {
+  font-size: 4rem;
+  font-weight: bold;
+  padding-right: 2rem;
+  display: inline-block;
+  font-family: 'Lobster', verdana;
+}
+
+header .sub-title {
+  display: inline-block;
+  font-style: italic;
+}
+
  /*GENERAL LAYOUT STYLE */
 
 .app-container {
@@ -68,7 +81,7 @@ header, footer {
 .spell {
   background-color: #3c6084;
   border: 1px solid black;
-  border-radius: 20px;
+  border-radius: 25px;
   width: 400px;
   padding: 20px;
   margin: 5px;

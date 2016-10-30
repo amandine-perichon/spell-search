@@ -81,7 +81,8 @@ export default React.createClass({
     return (
       <div className="app">
         <header>
-          <h1>Search for spells</h1>
+          <div className="title">5E Spellbook</div>
+          <div className="sub-title">Dungeons & Dragons 5th edition spell search</div>
         </header>
         <div className="app-container">
             <SearchForm key={this.state.lastFormReset}
@@ -113,7 +114,7 @@ export default React.createClass({
                            componentType={this.state.componentType}
                            />
         </div>
-        <footer>Work in progress... on Github: https://github.com/amandine-perichon/spell-search</footer>
+        <footer>Github: https://github.com/amandine-perichon/spell-search</footer>
       </div>
     )
   }
