@@ -18,10 +18,8 @@ function connect () {
 }
 
 function findSpells (params) {
-  console.log("before transformation", params)
   const query = buildFindSpellsQuery(params)
   const options = {sort: "name"}
-  console.log("after transformation", query)
   return spellCollection.find(query, options)
 }
 
